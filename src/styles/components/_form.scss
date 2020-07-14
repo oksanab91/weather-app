@@ -1,0 +1,91 @@
+@import "../abstracts/app-variables";
+
+@mixin input-border {
+    border: 1px solid $inputBorderColor;
+    border-radius: 0;
+}
+.app-form {
+    padding: 0 $paddingNormal $paddingNormal $paddingNormal;
+    line-height: $inputLineHeight;
+
+    .form-group > input, textarea {
+        @include input-border;
+    }
+    
+    .form-group > textarea {
+        font-size: .8em;
+    }    
+
+    .form-group-right {
+        padding-left: $paddingSmall;
+    }
+
+    .form-group-left {
+        margin: auto;
+        padding-right: $paddingSmall;
+
+        .form-group-inline-flex {
+            @include input-border;
+
+            display: inline-flex; 
+            width: 100%;           
+            background-color: $inputDisabled;
+    
+            input {
+                border: none;
+            }
+        }
+    }
+    
+    .form-group > img {
+        max-width: $cardMinWidth;
+    }      
+}
+
+.form-header {
+    padding: 1rem;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    >* {    
+        margin-right: 0.25rem;
+        margin-left: 0.25rem;    
+    }
+}
+
+.error-message {
+    color: $errorMessageColor;
+}
+
+.text-center {
+    margin: auto;
+}
+
+.text-vertical-center {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+@media screen and (max-width: 800px) {
+    .app-form {
+        padding-bottom: $mobileContainerMargine;             
+
+        .form-group-left, .form-group-right {
+            padding-left: $paddingExSm;
+            padding-right: $paddingExSm;
+        }
+    }
+
+    .form-group {
+        margin-bottom: 0.5rem;
+
+        img {
+            width: 60%;
+        }
+    }
+    
+}

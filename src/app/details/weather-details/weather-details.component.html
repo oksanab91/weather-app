@@ -1,0 +1,31 @@
+<nav-search></nav-search>
+
+<div class="container-fluid">    
+    <div class="container container-form">
+        <div class="container-header">
+            <ng-container *ngIf="(details$ | async) as details">
+                <div class="row clear-all">
+                    <div class="col-md-6 col-sm-6 col-12 col-lg-6">
+                        <p>locationId: {{details.locationId}}</p>
+                        <p>locationName: {{details.locationName}}</p>
+                        <p>temperature: {{details.currentCondition.temperature}} {{details.currentCondition.tempUnit}}</p>
+                    </div>
+    
+                    <div class="col-md-6 col-sm-6 col-12 col-lg-6">
+                        isFavorite: {{details.isFavorite}}
+                    </div>
+                    
+                    <div class="col-md-12 col-sm-12 col-12 col-lg-12">
+                        <h2>{{details.currentCondition.weatherText}}</h2>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="!(details$ | async)">Loading...</ng-container>
+        </div>
+
+        <div>
+            <forecast [locationId] = "locationId"></forecast>                
+        </div>            
+        
+    </div>
+</div>

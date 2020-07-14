@@ -1,0 +1,71 @@
+@import "abstracts/app-variables";
+@import "components/form";
+
+.navbar {
+    @include input-border;
+}
+
+.navbar .container-fluid {
+    justify-content: center;    
+}
+
+.searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: $btnDiameter;
+    background-color: #353b48;
+    border-radius: 30px;
+    padding: $paddingSmall;
+}
+
+.search-input{
+    color: $btnActiveColor;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 2.5rem;
+    transition: width 0.4s linear;
+}
+
+.searchbar:hover > .search-input{
+    padding: 0 $paddingSmall;
+    width: 450px;
+    caret-color: $btnWarnColor;
+    transition: width 0.4s linear;
+}
+
+.searchbar:hover > .search-icon{
+    background: $btnActiveColor;
+    color: $btnWarnColor;
+}
+
+.search-icon{
+    height: 2.5rem;
+    width: 2.5rem;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    text-decoration:none;
+}
+    
+@media screen and (max-width: 800px) {
+    .navbar .container-fluid {
+        padding: 0;        
+    }
+
+    .navbar-brand {
+        margin: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .searchbar:hover > .search-input{
+        padding: 0 $paddingExSm;
+        width: 250px;        
+    }
+}

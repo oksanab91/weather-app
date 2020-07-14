@@ -1,0 +1,23 @@
+<div class="card widget-card">
+    <div class="card-body">          
+      <div class="card-block block-widget">
+        <h5 class="card-title">{{favorite.locationName}}</h5>
+        <h6 class="card-subtitle">{{favorite.currentCondition.temperature}} {{favorite.currentCondition.tempUnit}}</h6>        
+      </div>
+
+      <div class="card-block">
+        <div class="card-block block-widget">
+          <h6 class="card-title">{{favorite.currentCondition.weatherText}}</h6>          
+        </div>
+      </div>
+    </div>
+
+    <li>
+      <div class="card-block card-footer">                
+        <a href="#" class="btn btn-small btn-card-edit" 
+          [routerLink]="['/home/details', favorite.locationId]" aria-label="Details">            
+          <i class="fas fa-pencil-alt fa-sm"></i>                             
+        </a>                     
+      </div>
+    </li>  
+</div>
