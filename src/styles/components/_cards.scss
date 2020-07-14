@@ -1,0 +1,170 @@
+@import "../abstracts/app-variables";
+
+$mobileCardPlusHeight: 6.7rem;
+
+@mixin app-card {    
+    min-width: $cardMinWidth;
+    min-height: $cardMinHeight;
+    height: 100%;
+    border-radius: 0px;    
+    @include box-shadow;
+    @include container-border;
+}
+
+.app-card {
+    @include app-card;
+    
+    h6{
+        padding-top: 1.6rem;
+    }
+
+    h5 {
+        overflow: hidden;
+        overflow-wrap: normal;
+    }
+
+    p {
+        margin: 0;
+    }
+    
+    // .fa-sm {
+    //     font-size: $fontSize;
+    // }
+}
+
+.card-plus {
+    @include app-card;
+    
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+
+    .justify-content {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.card-block-left {
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: $paddingSmall 0 $paddingSmall $paddingSmall;    
+}
+
+.card-block {
+    .card-text {
+        white-space: break-spaces;
+    }
+}
+
+.card-block-list {
+    @include clear-all;    
+    list-style-type: none;    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: nowrap;    
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    border: none;
+    padding: $paddingNormal 0;    
+    background-color: transparent;
+
+    >* {    
+        margin-right: 0.25rem;
+        margin-left: 0.25rem;    
+    }
+}
+
+.card-title {    
+    margin: 0;
+    padding: $paddingNormal 0;
+}
+
+.row-max-height {
+    height: 100%;
+}
+
+.widget-card {
+    @include app-card;
+    min-width: auto;
+    min-height: auto;
+    padding: $paddingNormal;
+
+    .card {
+        border-radius: 0;
+        border: none;
+
+        .collapse, .show {
+            max-height: 0;
+            transition: max-height 0.4s ease-in-out;
+        }
+        
+        .collapse:not(.show) {
+            display: block;
+            max-height: 0;   
+        }
+        
+        .show {
+            display: block;
+            max-height: $cardMinWidth;    
+        }
+    }
+
+    .card-body {
+        padding: 0;        
+        text-align: center;       
+    }
+    
+    .block-info {
+        display: inline-flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .block-widget {
+        font-size: $widgetFontSize; 
+        padding: $paddingNormal 0;        
+    }
+
+    .btn-submit {
+        margin: auto;
+    }
+    
+    #accordionHeading {
+        padding-bottom: 0;
+        background-color: $btnColorDark;
+        color: $btnActiveColor;
+        opacity: 1;
+        transition: opacity 0.4s ease-in-out;
+        
+        &:hover {
+            opacity: 0.9;            
+        }
+        .card-link {
+            h5 {
+                font-weight: 200;
+            }
+            .card-block > h5 {
+                font-weight: 200;                
+            }
+        }        
+    }
+}
+
+
+@media screen and (max-width: 800px) {
+    .card-block-left {
+        text-align-last: end;
+    }
+
+    .card-plus {
+        margin-bottom: -$mobileCardPlusHeight;
+        min-height: $mobileCardPlusHeight;
+        height: $mobileCardPlusHeight;
+    }
+}

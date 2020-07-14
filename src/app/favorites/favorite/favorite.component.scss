@@ -1,0 +1,12 @@
+@import "components/cards";
+@import "components/button";
+
+:host { 
+    padding: $paddingSmall;
+}
+
+@media screen and (max-width: 800px) {
+    :host { 
+        padding: 0;
+    }
+}
