@@ -1,22 +1,28 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
-import { Subscription, Subject } from 'rxjs';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Subscription, Subject, Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { WeatherStore } from '@core/store';
+import { LocationShort } from 'src/app/models';
 
 @Component({
   selector: 'nav-search',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './nav-search.component.html',
   styleUrls: ['./nav-search.component.scss']
 })
 export class NavSearchComponent implements OnInit, OnDestroy {
-
+  title: 'Herolo Weather Task'
   private searchName = new Subject<string>();
   private subscription: Subscription;
+  locations$: Observable<LocationShort[]>
+  keyword = 'name'
   
 
-  constructor() { }
+  constructor(private store: WeatherStore) { }
 
   ngOnInit() {
+    this.locations$ = this.store.locations$ 
+
     this.subscription = this.searchName.pipe(      
       // wait 300ms after each keystroke before considering the filter
       debounceTime(300),
@@ -25,7 +31,7 @@ export class NavSearchComponent implements OnInit, OnDestroy {
       distinctUntilChanged(),
 
       // switch to new search observable each time the filter changes
-      // switchMap((filter: string) => this.store.search(filter))                
+      switchMap((filter: string) => of(this.store.loadLocations(filter)))               
     )
     .subscribe();
 
@@ -35,9 +41,17 @@ export class NavSearchComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  // Push a search filter into the observable stream.
-  search(filter: string): void {    
+  selectEvent(item) {
+    this.store.loadDetails(item)
+  }
+
+  onChangeSearch(filter: string) {    
     this.searchName.next(filter);
   }
+
+  onFocused(e) {
+    // do something
+  }
+
 
 }

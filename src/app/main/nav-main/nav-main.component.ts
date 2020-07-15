@@ -5,8 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './nav-main.component.html',
   styleUrls: ['./nav-main.component.scss']
 })
-export class NavMainComponent implements OnInit {
-  title = 'Herolo Weather Task'
+export class NavMainComponent implements OnInit { 
     
   constructor() { }
 

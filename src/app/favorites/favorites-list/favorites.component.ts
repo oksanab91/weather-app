@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { WeatherStore } from '@core/store';
 
 
+
 @Component({
   selector: 'favorites',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,14 +15,14 @@ import { WeatherStore } from '@core/store';
   host: { '[@fadeInAnimation]': '' }
 })
 export class FavoritesComponent implements OnInit{
-  favorites$: Observable<Favorite[]>
+  favorites$: Observable<Favorite[]> 
 
-  constructor(private store: WeatherStore) {    
-    this.store.loadFavorites()    
+  constructor(private store: WeatherStore) {
+    this.store.loadFavorites()
   }  
 
-  ngOnInit() {
-    this.favorites$ = this.store.favorites$    
+  ngOnInit() {    
+    this.favorites$ = this.store.favorites$ 
   }
 
   trackByFn(index, item) {

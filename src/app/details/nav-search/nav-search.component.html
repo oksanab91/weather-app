@@ -1,13 +1,43 @@
-<nav class="navbar navbar-light bg-light">
+<!-- <nav class="navbar navbar-light bg-light">
   <div class="container-fluid h-100">
-    <span class="navbar-brand mb-0 h1"></span>
-    
-    <div class="d-flex justify-content-center h-100">
-      <div class="searchbar">
-        <input #searchBox id="search-box" class="search-input" type="text" name="" 
-          placeholder="Search..." (input)="search(searchBox.value)" aria-label="Search">
-        <span class="search-icon"><i class="fa fa-search"></i></span>
-      </div>
-    </div>
 
-  </div></nav>
+    <div style="width: 100%;">
+      <span class="navbar-brand mb-0 h2">Select city</span>
+    
+      <div class="d-flex justify-content-center h-100">
+        <div class="searchbar">
+          <input #searchBox id="search-box" class="search-input" type="text" name="" 
+            placeholder="Search..." (input)="search(searchBox.value)" aria-label="Search">
+          <span class="search-icon"><i class="fa fa-search"></i></span>
+        </div>
+      </div>
+    </div
+
+  </div>
+</nav>   -->
+
+
+<ng-container *ngIf="(locations$ | async) as locations">
+
+<div class="ng-autocomplete">
+  <ng-autocomplete
+    [data]="locations"
+    [searchKeyword]="keyword"
+    placeHolder="Enter the City Name"
+    (selected)='selectEvent($event)'
+    (inputChanged)='onChangeSearch($event)'
+    (inputFocused)='onFocused($event)'
+    historyIdentifier="locations"
+    [itemTemplate]="itemTemplate"
+    [notFoundTemplate]="notFoundTemplate">
+  </ng-autocomplete>
+
+  <ng-template #itemTemplate let-item>
+    <a [innerHTML]="item.name"></a>
+  </ng-template>
+
+  <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]=""></div>
+  </ng-template>
+</div>
+</ng-container>

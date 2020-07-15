@@ -1,12 +1,12 @@
-import { WeatherDetails, WeatherCondition, WeatherForecast } from './weather';
-import { Location } from './location';
+import { LocationWeather, WeatherCondition, WeatherForecast } from './weather';
+import { LocationShort } from './location';
 import { Favorite } from './favorite';
 
 export const models = [    
-    WeatherDetails,
+    LocationWeather,
     WeatherCondition,
     WeatherForecast,
-    Location,
+    LocationShort,
     Favorite 
 ];
 

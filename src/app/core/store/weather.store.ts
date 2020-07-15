@@ -7,21 +7,22 @@ import { LoadFavorites, AddFavorites, RemoveFavorites,
 
 @Injectable()
 export class WeatherStore {
-  favorites$ = this.store.select(state => {    
+  favorites$ = this.store.select(state => {        
     return state['weather'].favorites})
   details$ = this.store.select(state => {    
     return state['weather'].details})
   forecast$ = this.store.select(state => {      
       return state['weather'].forecast})
+  locations$ = this.store.select(state => {    
+    return state['weather'].locations})
 
-
+      
   constructor(private store: Store<AppState>) {}
 
   loadFavorites() {
-      console.log('store load fav')
     this.store.dispatch(new LoadFavorites())
   }
-  
+
   addFavorite(favorite) {
     this.store.dispatch(new AddFavorites(favorite))
   }
@@ -30,12 +31,12 @@ export class WeatherStore {
     this.store.dispatch(new RemoveFavorites(favoriteId))
   }
 
-  loadDetails(locationId) {    
-    this.store.dispatch(new LoadDetails(locationId))
+  loadDetails(location) {    
+    this.store.dispatch(new LoadDetails(location))
   }
 
-  loadLocations() {    
-    this.store.dispatch(new LoadLocations())
+  loadLocations(filter) {    
+    this.store.dispatch(new LoadLocations(filter))
   }
 
   loadForecast(locationId) {    

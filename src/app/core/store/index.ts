@@ -1,7 +1,12 @@
 import { WeatherStore } from './weather.store';
+// import { favoritesLocationsSelect, forecast$, details$, favorites$ } from './store-state';
 
 export const stores = [
-    WeatherStore    
+    WeatherStore
+    // favoritesLocationsSelect,
+    // favorites$,
+    // details$,
+    // forecast$
 ];
 
 export * from './store-state'

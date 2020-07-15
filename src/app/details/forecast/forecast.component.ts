@@ -9,8 +9,9 @@ import { WeatherStore } from '@core/store';
   styleUrls: ['./forecast.component.scss']
 })
 export class ForecastComponent implements OnInit {
-  @Input()  locationId: number;
+  @Input()  locationId: string;
   forecast$: Observable<WeatherForecast[]>
+
   constructor(private store: WeatherStore) {
     this.store.loadForecast(this.locationId)
    }
