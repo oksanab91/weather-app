@@ -21,20 +21,15 @@ $mobileNavHeight: 6.6rem;
     padding: $paddingSmall;
 } 
 
-.nav-items {
-    display: inline-flex;
+.nav-items {    
     list-style-type: none;
     margin: 0;    
-    padding: calc(#{$paddingSmall} * 2);    
-    // position: absolute;    
-    text-align: center;
-    left: 0;
-    top: $containerMargine;    
-    z-index: 1000;
+    padding: calc(#{$paddingSmall} * 2);
     
-    // .nav-item {        
-    //     padding-bottom: $paddingSmall;
-    // }
+    .nav-item {        
+        padding-left: $paddingSmall;
+        padding-left: $paddingSmall;
+    }
 }
 
 .clear-all {
@@ -52,20 +47,6 @@ $mobileNavHeight: 6.6rem;
 
     .row-list {        
         @include clear-all;
-    }
-    
-    // .nav-items {
-    //     position: fixed;
-    //     top: auto;
-    //     left: 0;
-    //     bottom: 0;
-    //     display: flex;
-    //     width: 100%;
-    //     height: $mobileNavHeight;
-    //     padding: $paddingExSm;        
-    //     background-color: $btnColorDark;
-    //     color: $btnActiveColor;
-    //     text-align: center;
-    //  }
+    }   
 
 }

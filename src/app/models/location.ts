@@ -1,4 +1,4 @@
-export class Location {
+export class LocationShort {
     id: string
     name: string
 }

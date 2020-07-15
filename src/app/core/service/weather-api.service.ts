@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import configApi from 'src/app/config.accuweather-api'
-import { from, of } from 'rxjs';
-import { mergeMap, toArray } from 'rxjs/operators';
+import { from, of, Observable, forkJoin } from 'rxjs';
+import { mergeMap, toArray, map } from 'rxjs/operators';
+import { LocationShort } from 'src/app/models';
 
 
 @Injectable({
@@ -11,8 +12,30 @@ import { mergeMap, toArray } from 'rxjs/operators';
 export class WeatherApiService {  
   url: string
   isDevelopment = configApi.environment === 'dev'
-
+  private favoritesList: LocationShort[] = []
+  
   constructor(private http: HttpClient) { }
+
+  checkIsFavorite(locationId){
+    return this.favoritesList.findIndex(fav => fav.id == locationId) >= 0
+  }
+
+  addFavorite(favorite){    
+    this.favoritesList = [...this.favoritesList, favorite]
+    return of('success')
+  }
+
+  removeFavorite(locationId){    
+    const ind = this.favoritesList.findIndex(fav => fav.id == locationId)
+
+    if(ind < 0) return of('success')
+    if(this.favoritesList.length === 1) this.favoritesList = []
+          
+    this.favoritesList = [...this.favoritesList.slice(0, ind),
+    ...this.favoritesList.slice(ind + 1)]    
+
+    return of('success')
+  }
 
   getCurrentCondition(locationId: string) {
     if(this.isDevelopment) this.url = `${configApi.url_devpath}current-condition.json`
@@ -21,23 +44,36 @@ export class WeatherApiService {
     return this.http.get(this.url);   
   }
 
-  getFavorites(filter: string[]){
-    if(filter.length === 0) return of([])
-
-    const favorites$ = from(filter).pipe(
-        mergeMap( (locationId: string) => this.getCurrentCondition(locationId)),        
+  getFavorites(){    
+    if(this.favoritesList.length === 0) return of([])
+    
+    const favorites$ = from(this.favoritesList).pipe(
+        mergeMap((location) => {
+          return  forkJoin([
+            of(location),
+            this.getCurrentCondition(location.id)
+          ]).pipe( map(([location, weather]) => {return { location, weather }})
+          )
+        }),        
       toArray())
-      
-      return favorites$
+
+    return favorites$
   }
 
-  getLocations(filter: string) {
-    console.log('in get service')
+  getLocations(filter: string): Observable<any[]> {    
     if(this.isDevelopment) this.url = `${configApi.url_devpath}locations.json`
     else this.url = `http://${configApi.apiHost}/locations/v1/cities/autocomplete?apikey=${configApi.apiKey}&q=${filter}`
-   
-    console.log(this.url)
-    return this.http.get(this.url);   
+    
+    let data$ = this.http.get<any[]>(this.url)
+
+    if(this.isDevelopment){      
+      data$ = data$.pipe(map(val => {
+        const rx = new RegExp(filter.toLowerCase(), 'i');
+        return val.filter(item => { return rx.test(item.LocalizedName.toLowerCase()) })
+        }
+      ))
+    }
+    return data$   
   }
 
   getForecast(locationId: string) {

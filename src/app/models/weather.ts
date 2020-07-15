@@ -1,4 +1,4 @@
-export class WeatherDetails {
+export class LocationWeather {
     locationId: string
     locationName: string
     isFavorite: boolean

@@ -1,4 +1,4 @@
-import { WeatherCondition } from '.'
+import { WeatherCondition } from './weather';
 
 export class Favorite {
     locationId: string

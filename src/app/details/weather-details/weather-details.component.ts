@@ -1,31 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { WeatherDetails } from '@models/models';
+import { LocationWeather, LocationShort } from '@models/models';
 import { Observable } from 'rxjs';
 import { WeatherStore } from '@core/store';
+import { Location } from '@angular/common';
 import { fadeInAnimation } from 'src/app/app-animations';
 
 @Component({
   selector: 'weather-details',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './weather-details.component.html',
   styleUrls: ['./weather-details.component.scss'],
   animations: [fadeInAnimation],
   host: { '[@fadeInAnimation]': '' }
 })
-export class WeatherDetailsComponent implements OnInit {  
-  locationId = 215854
-  details$: Observable<WeatherDetails>  
+export class WeatherDetailsComponent implements OnInit {
+  locationInit: LocationShort = new LocationShort()  
+  defaultLocation: LocationShort = {id: '215854', name: 'Tel Aviv'}
+  details$: Observable<LocationWeather>  
 
-  constructor(private route: ActivatedRoute, private store: WeatherStore) {
-    const Id = + this.route.snapshot.paramMap.get('id');    
-    this.locationId = Id ? Id : this.locationId
-    console.log(this.locationId)
+  constructor(private route: ActivatedRoute, private loc:Location, private store: WeatherStore) {
+    const param = this.loc.getState()
 
-    this.store.loadDetails(this.locationId)    
+    if(param && param['id']) {
+      this.locationInit.id = param['id']
+      this.locationInit.name = param['name']
+    }
+    else this.locationInit = this.defaultLocation    
+
+    this.store.loadDetails(this.locationInit)    
   }
 
   ngOnInit(): void {
     this.details$ = this.store.details$    
   }
+
+  updateFavorite(item: LocationWeather){       
+    if(item.isFavorite) this.store.removeFavorite(item.locationId)
+    else this.store.addFavorite({id: item.locationId, name: item.locationName})
+  }  
 
 }

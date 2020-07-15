@@ -17,7 +17,7 @@ import { NavMainComponent } from './nav-main/nav-main.component';
             loadChildren: () => import('../details/weather-details.module').then(m => m.WeatherDetailsModule) },
           { path: 'favorites', 
             loadChildren: () => import('../favorites/favorites.module').then(m => m.FavoritesModule) },
-          { path: 'details/:id', 
+          { path: 'details', data :{ id:'1', name:"Angular" },
             loadChildren: () => import('../details/weather-details.module').then(m => m.WeatherDetailsModule) }          
         ]}     
     ])

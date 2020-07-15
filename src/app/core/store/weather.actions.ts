@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { Favorite } from '@models/models'
+import { LocationShort } from '@models/models'
 
 export const ADD_FAVORITES      = '[FAVORITES] Add'
 export const REMOVE_FAVORITES   = '[FAVORITES] Remove'
@@ -7,10 +7,13 @@ export const LOAD_FAVORITES     = '[FAVORITES] Load'
 export const LOAD_DETAILS       = '[DETAILS] Load'
 export const LOAD_LOCATIONS     = '[LOCATIONS] Load'
 export const LOAD_FORECAST      = '[FORECAST] Load'
+export const ADD_FAVORITES_SUCCESS      = '[FAVORITES] Add Success'
+export const REMOVE_FAVORITES_SUCCESS   = '[FAVORITES] Remove Success'
 export const LOAD_FAVORITES_SUCCESS     = '[FAVORITES] Load Success'
 export const LOAD_DETAILS_SUCCESS       = '[DETAILS] Load Success'
 export const LOAD_LOCATIONS_SUCCESS     = '[LOCATIONS] Load Success'
 export const LOAD_FORECAST_SUCCESS      = '[FORECAST] Load Success'
+
 
 
 export class LoadFavorites implements Action {
@@ -21,13 +24,22 @@ export class LoadFavoritesSuccess implements Action {
     readonly type = LOAD_FAVORITES_SUCCESS
     constructor(public payload: any) {}
 }
+
 export class AddFavorites implements Action {
     readonly type = ADD_FAVORITES
-    constructor(public payload: Favorite) {}
+    constructor(public payload: LocationShort) {}
+}
+export class AddFavoritesSuccess implements Action {
+    readonly type = ADD_FAVORITES_SUCCESS
+    constructor(public payload: any) {}
 }
 export class RemoveFavorites implements Action {
     readonly type = REMOVE_FAVORITES
     constructor(public payload: number) {}
+}
+export class RemoveFavoritesSuccess implements Action {
+    readonly type = REMOVE_FAVORITES_SUCCESS
+    constructor(public payload: any) {}
 }
 
 export class LoadDetails implements Action {
@@ -41,7 +53,7 @@ export class LoadDetailsSuccess implements Action {
 
 export class LoadLocations implements Action {
     readonly type = LOAD_LOCATIONS
-    constructor() {}
+    constructor(public payload: any) {}
 }
 export class LoadLocationsSuccess implements Action {
     readonly type = LOAD_LOCATIONS_SUCCESS
@@ -61,5 +73,6 @@ export type Actions =
     LoadFavorites | LoadFavoritesSuccess |
     LoadDetails | LoadDetailsSuccess |    
     AddFavorites | RemoveFavorites |
+    AddFavoritesSuccess | RemoveFavoritesSuccess |
     LoadLocations | LoadLocationsSuccess |
-    LoadForecast | LoadForecastSuccess
+    LoadForecast | LoadForecastSuccess  
