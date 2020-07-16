@@ -7,7 +7,6 @@ $mobileCardPlusHeight: 6.7rem;
     min-height: $cardMinHeight;
     height: 100%;
     border-radius: 0px;
-    @include container-border;
 }
 
 .app-card {
@@ -90,7 +89,6 @@ $mobileCardPlusHeight: 6.7rem;
     min-width: auto;
     min-height: auto;
     padding: $paddingNormal;
-
     background-color: $btnColorDark;
     color: $btnActiveColor;
 
