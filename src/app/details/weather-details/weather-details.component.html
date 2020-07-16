@@ -16,7 +16,7 @@
                     <span>Add to Favorites</span>
                 </div>
                 <div class="col-md-12 col-sm-12 col-12 col-lg-12 container-header-block">
-                    <i class="fas fa-cloud-sun" style="font-size: 30px;"></i>
+                    <i class="{{setWeatherIcon(details.currentCondition.weatherIcon, details.currentCondition.temperature)}}" style="font-size: 30px;"></i>
                     <h2>{{details.currentCondition.weatherText}}</h2>
                 </div>
             </div>

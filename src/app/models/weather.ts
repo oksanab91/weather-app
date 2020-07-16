@@ -9,6 +9,7 @@ export class WeatherCondition {
     temperature: number
     tempUnit: string
     weatherText: string
+    weatherIcon: number
 }
 
 export class WeatherForecast {
@@ -16,4 +17,5 @@ export class WeatherForecast {
     temperature: number
     tempUnit: string
     weatherText: string
+    weatherIcon: number
 }

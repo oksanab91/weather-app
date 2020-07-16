@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { WeatherForecast } from '@models/models';
-import { WeatherStore } from '@core/store';
+import { HelperService } from '@core/service';
 
 @Component({
   selector: 'forecast',
@@ -10,11 +10,15 @@ import { WeatherStore } from '@core/store';
 export class ForecastComponent {
   @Input()  forecast: WeatherForecast[]
   
-  constructor(private store: WeatherStore) {
+  constructor(private helper: HelperService) {
   }
 
   roundTemperature(temp) {
     return Math.round(temp)
+  }
+
+  setWeatherIcon(iconNumber, temperature) {    
+    return this.helper.setWeatherIcon(iconNumber, temperature)
   }
 
   trackByFn(index, item) {

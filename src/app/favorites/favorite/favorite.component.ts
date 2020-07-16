@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Favorite } from '@models/models';
-import { AlertService } from '@core/service';
+import { AlertService, HelperService } from '@core/service';
 
 @Component({
   selector: 'favorite',
@@ -10,13 +10,17 @@ import { AlertService } from '@core/service';
 export class FavoriteComponent implements OnInit {
   @Input()  favorite: Favorite;
 
-  constructor(private alertService: AlertService) {
+  constructor(private alertService: AlertService, private helper: HelperService) {
     this.alertService.reset();
   }
 
   ngOnInit() {
   }
 
+  setWeatherIcon(iconNumber, temperature) {    
+    return this.helper.setWeatherIcon(iconNumber, temperature)
+  }
+  
   // hasMapUrl(): boolean {
   //   return this.favorite.googleMapUrl !== '';
   // }

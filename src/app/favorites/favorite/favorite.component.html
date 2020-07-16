@@ -12,7 +12,7 @@
 
       <div class="card-block">
         <div class="card-block block-widget">
-          <i class="fas fa-cloud-sun" style="font-size: 30px;"></i>
+          <i class="{{setWeatherIcon(favorite.currentCondition.weatherIcon, favorite.currentCondition.temperature)}}" style="font-size: 30px;"></i>
           <h6 class="card-title">{{favorite.currentCondition.weatherText}}</h6>          
         </div>
       </div>
