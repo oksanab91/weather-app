@@ -7,14 +7,10 @@ import { LoadFavorites, AddFavorites, RemoveFavorites,
 
 @Injectable()
 export class WeatherStore {
-  favorites$ = this.store.select(state => {        
-    return state['weather'].favorites})
-  details$ = this.store.select(state => {    
-    return state['weather'].details})
-  forecast$ = this.store.select(state => {      
-      return state['weather'].forecast})
-  locations$ = this.store.select(state => {    
-    return state['weather'].locations})
+  favorites$ = this.store.select(state => state['weather'].favorites)
+  details$ = this.store.select(state => state['weather'].details)
+  forecast$ = this.store.select(state => state['weather'].forecast)
+  locations$ = this.store.select(state => state['weather'].locations)
 
       
   constructor(private store: Store<AppState>) {}

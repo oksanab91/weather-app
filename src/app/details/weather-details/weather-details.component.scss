@@ -1,3 +1,28 @@
+@import "abstracts/app-variables";
+@import "components/form";
+@import "components/button";
+
+
 .container-header{
     text-align: center;
+    padding-top: $paddingNormal;
+    padding-bottom: $paddingNormal;
+    color: $btnActiveColor;
+    
+    .container-header-block {
+        padding-top: $paddingSmall;
+        padding-bottom: $paddingSmall;
+    }
+}
+
+.btn-card-add {
+    color: $btnColorDark;    
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (max-width: 800px) {
+    .container-fluid {
+        padding: 0;
+    }
 }

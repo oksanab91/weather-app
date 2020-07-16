@@ -1,24 +1,21 @@
 <div class="card widget-card">
+  <a class="card-link" href="#"
+    [routerLink]="['/home/details']" 
+    [state]="{ id:favorite.locationId , name:favorite.locationName}" aria-label="Details">
+
     <div class="card-body">          
       <div class="card-block block-widget">
+        <i class="fas fa-star fa-sm"></i>
         <h5 class="card-title">{{favorite.locationName}}</h5>
         <h6 class="card-subtitle">{{favorite.currentCondition.temperature}} {{favorite.currentCondition.tempUnit}}</h6>        
       </div>
 
       <div class="card-block">
         <div class="card-block block-widget">
+          <i class="fas fa-cloud-sun" style="font-size: 30px;"></i>
           <h6 class="card-title">{{favorite.currentCondition.weatherText}}</h6>          
         </div>
       </div>
     </div>
-
-    <li>
-      <div class="card-block card-footer">                
-        <a href="#" class="btn btn-small btn-card-edit"
-          [routerLink]="['/home/details']" 
-          [state]="{ id:favorite.locationId , name:favorite.locationName}" aria-label="Details">
-          <i class="fas fa-pencil-alt fa-sm"></i>                             
-        </a>                     
-      </div>
-    </li>  
+    </a>
 </div>

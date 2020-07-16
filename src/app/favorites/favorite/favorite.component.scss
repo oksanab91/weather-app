@@ -5,8 +5,21 @@
     padding: $paddingSmall;
 }
 
-@media screen and (max-width: 800px) {
-    :host { 
-        padding: 0;
+.card-block h6 {
+    font-weight: 400;
+}
+
+.widget-card {    
+    &:hover {
+        opacity: 0.9;            
+    }
+    .card-link {
+        color: $btnActiveColor;
+        h5 {
+            font-weight: 200;
+        }
+        .card-block > h5 {
+            font-weight: 200;                
+        }
     }
 }

@@ -20,6 +20,10 @@ export class ForecastComponent implements OnInit {
     this.forecast$ = this.store.forecast$
   }
 
+  roundTemperature(temp) {
+    return Math.round(temp)
+  }
+
   trackByFn(index, item) {
     return item.id
   }

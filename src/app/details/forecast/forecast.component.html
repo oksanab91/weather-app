@@ -1,19 +1,22 @@
-<div class="row row-list">    
-    <ng-container *ngFor="let forecast of forecast$ | async; trackBy: trackByFn">
-        <div class="col-md-3 col-sm-12 col-12 col-lg-2">
-            <div class="card widget-card">
-                <div class="card-body">          
-                    <div class="card-block block-widget">
-                        <h5 class="card-title">{{forecast.day}}</h5>
-                        <h6 class="card-subtitle">{{forecast.temperature}} {{forecast.tempUnit}}</h6>
-                    </div>                
-                    <div class="card-block">
+<div class="container">
+    <div class="row row-list">    
+        <ng-container *ngFor="let forecast of forecast$ | async; trackBy: trackByFn">            
+            <div class="col-sm card-wrap">
+                <div class="card widget-card">
+                    <div class="card-body">          
                         <div class="card-block block-widget">
-                        <h6 class="card-title">{{forecast.weatherText}}</h6>          
+                            <h5 class="card-title">{{forecast.day | date: "MMM d, y"}}</h5>
+                            <h6 class="card-subtitle">{{roundTemperature(forecast.temperature)}} {{forecast.tempUnit}}</h6>
+                        </div>                
+                        <div class="card-block">
+                            <div class="card-block block-widget">
+                                <i class="fas fa-cloud-sun" style="font-size: 30px;"></i>
+                                <h6 class="card-title">{{forecast.weatherText}}</h6>          
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                </div>        
-            </div>
-        </div>
-    </ng-container>
+                </div>
+            </div>        
+        </ng-container>
+    </div>
 </div>

@@ -4,12 +4,18 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 It is a responsive web application that shows the weather of some city.
 
+The city can be searched and selected from the list.
+
+In addition, there is an option to keep favorite cities.
+
+
 
 ### Main libraries and techniques:
 
 - [Bootstrap 4](https://getbootstrap.com/docs/4.4/getting-started/introduction/) and Font Awesome Web Application icons for design and styling
 - [RxJs](https://angular.io/guide/rx-library) to get and manage data
 - [NgRx](https://ngrx.io/) for state management of the app
+- [Angular Autocomplete](https://www.npmjs.com/package/angular-ng-autocomplete) to show and select the cities from AccuWeather API 
 - [AccuWeather API](https://developer.accuweather.com/) to get current weather condition and 5 day's forecast by location
 
 
