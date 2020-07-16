@@ -4,6 +4,7 @@ import configApi from 'src/app/config.accuweather-api'
 import { from, of, Observable, forkJoin } from 'rxjs';
 import { mergeMap, toArray, map } from 'rxjs/operators';
 import { LocationShort } from 'src/app/models';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { LocationShort } from 'src/app/models';
 })
 export class WeatherApiService {  
   url: string
-  isDevelopment = configApi.environment === 'dev'
+  isDevelopment = environment.apiTest
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'text/plain'      
   })

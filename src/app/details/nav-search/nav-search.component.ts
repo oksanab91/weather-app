@@ -43,6 +43,7 @@ export class NavSearchComponent implements OnInit, OnDestroy {
 
   selectEvent(item) {
     this.store.loadDetails(item)
+    this.store.loadForecast(item.id)
   }
 
   onChangeSearch(filter: string) {    

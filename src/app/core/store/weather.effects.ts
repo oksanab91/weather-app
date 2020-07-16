@@ -31,10 +31,11 @@ export class WeatherEffects {
               const tm = data.weather[0].Temperature.Metric.Value
               const tmUnit = data.weather[0].Temperature.Metric.Unit            
               const desc = data.weather[0].WeatherText
+              const weatherIcon = data.weather[0].WeatherIcon
 
               return {locationId: data.location.id,
                 locationName: data.location.name,    
-                currentCondition: {temperature: tm, tempUnit: tmUnit, weatherText: desc}}
+                currentCondition: {temperature: tm, tempUnit: tmUnit, weatherText: desc, weatherIcon: weatherIcon}}
             })
 
             return { type: WeatherActions.LOAD_FAVORITES_SUCCESS, payload: favorites }}
@@ -73,14 +74,15 @@ export class WeatherEffects {
         map(weather => {            
             const tm = weather[0].Temperature.Metric.Value
             const tmUnit = weather[0].Temperature.Metric.Unit
-            const desc = weather[0].WeatherText            
+            const desc = weather[0].WeatherText
+            const weatherIcon = weather[0].WeatherIcon
             
             return { type: WeatherActions.LOAD_DETAILS_SUCCESS, 
               payload: {
                 locationId: action.payload.id, 
                 locationName: action.payload.name, 
                 isFavorite: this.apiService.checkIsFavorite(action.payload.id),
-                currentCondition: {temperature: tm, tempUnit: tmUnit, weatherText: desc}} 
+                currentCondition: {temperature: tm, tempUnit: tmUnit, weatherText: desc, weatherIcon: weatherIcon}} 
               }}
             ),
         catchError(() => EMPTY)
@@ -101,8 +103,9 @@ export class WeatherEffects {
             const tmmax = day.Temperature.Maximum.Value
             const unit = day.Temperature.Minimum.Unit            
             const desc = day.Day.ShortPhrase
+            const weatherIcon = day.Day.Icon
 
-            return {day: dt, temperature: (tmmax+tmmin)/2, tempUnit: unit, weatherText: desc}
+            return {day: dt, temperature: (tmmax+tmmin)/2, tempUnit: unit, weatherText: desc, weatherIcon: weatherIcon}
           })
           
           return { type: WeatherActions.LOAD_FORECAST_SUCCESS, payload: daily }}

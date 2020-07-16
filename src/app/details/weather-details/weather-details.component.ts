@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { LocationWeather, LocationShort, WeatherForecast } from '@models/models';
 import { Observable } from 'rxjs';
 import { WeatherStore } from '@core/store';
 import { Location } from '@angular/common';
 import { fadeInAnimation } from 'src/app/app-animations';
+import { HelperService } from '@core/service';
 
 @Component({
   selector: 'weather-details',
@@ -20,14 +20,15 @@ export class WeatherDetailsComponent implements OnInit {
   details$: Observable<LocationWeather>
   forecast$: Observable<WeatherForecast[]>
 
-  constructor(private route: ActivatedRoute, private loc:Location, private store: WeatherStore) {
+  constructor(private loc:Location, 
+              private store: WeatherStore, private helper: HelperService) {
     const param = this.loc.getState()
 
     if(param && param['id']) {
       this.locationInit.id = param['id']
       this.locationInit.name = param['name']
     }
-    else this.locationInit = this.defaultLocation    
+    else this.locationInit = this.defaultLocation   
 
     this.store.loadDetails(this.locationInit)
     this.store.loadForecast(this.locationInit.id)   
@@ -41,6 +42,10 @@ export class WeatherDetailsComponent implements OnInit {
   updateFavorite(item: LocationWeather){       
     if(item.isFavorite) this.store.removeFavorite(item.locationId)
     else this.store.addFavorite({id: item.locationId, name: item.locationName})
-  }  
+  }
+
+  setWeatherIcon(iconNumber, temperature) {    
+    return this.helper.setWeatherIcon(iconNumber, temperature)
+  }
 
 }
