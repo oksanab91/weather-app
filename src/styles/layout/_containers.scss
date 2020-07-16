@@ -29,8 +29,16 @@ $mobileNavHeight: 6.6rem;
     }
 }
 
-.with-background {
-    @include main-background-color;
+.container-header{
+    text-align: center;
+    padding-top: $paddingNormal;
+    padding-bottom: $paddingNormal;
+    color: $btnSecondColorDark;
+    
+    .container-header-block {
+        padding-top: $paddingSmall;
+        padding-bottom: $paddingSmall;
+    }
 }
 
 .clear-all {

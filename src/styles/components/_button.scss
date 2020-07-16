@@ -13,7 +13,7 @@
     display: inline-block;    
 }
 
-@mixin button-round($diameter: $btnDiameter, $color: $btnColor, $background-color: $btnActiveColor) {
+@mixin button-round($diameter: $btnDiameter, $color: $btnColor, $background-color: $btnColorLight) {
     background-color: $background-color;
     color: $color;
     margin-bottom: auto;
@@ -66,7 +66,7 @@ a:hover {
 }
 
 .btn-submit {    
-    @include button-round(2.8rem, $btnColorDark);     
+    @include button-round(2.8rem, $btnActiveColor, $btnColorDark);     
 
     &:hover:not([disabled]) {
         @include button-hover;      
@@ -74,10 +74,10 @@ a:hover {
 }
 
 .btn-card-add {    
-    @include button-round(2.8rem, $btnActiveColor);    
+    @include button-round(2.8rem);    
         
     &:hover{
-        @include button-hover($btnColorLight);
+        @include button-hover;
     }
 }
             
@@ -99,6 +99,7 @@ a:hover {
 }
 
 .btn-sm-icon {
+    font-size: 1.5rem;
     &:focus {
         border: none;
         outline: none;
@@ -127,17 +128,14 @@ a:hover {
     @include sprite-icon('/assets/sprite-icone.png', -281px, 0);    
 }
 
-@media screen and (max-width: 800px) {
-    .btn-sm-icon, .btn-card-edit, .btn-card-add, btn-close, .btn-cancel, .btn-submit {
-        @include container-border;
-    }
+@media screen and (max-width: 800px) {    
     
     .btn-plus-mobile{
-        @include button-round($btnDiameter, $btnActiveColor, $btnColorDark);
+        @include button-round($btnDiameter, $btnActiveColor, $btnColorDark);        
         @include container-border;
             
         &:hover{
-            @include button-hover($btnColorLight);
+            @include button-hover($btnColorLight, $btnColorDark);
         }
     }
 }
