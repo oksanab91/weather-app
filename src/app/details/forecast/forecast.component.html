@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row row-list">    
-        <ng-container *ngFor="let forecast of forecast$ | async; trackBy: trackByFn">            
+        <ng-container *ngFor="let forecast of forecast; trackBy: trackByFn">            
             <div class="col-sm card-wrap">
                 <div class="card widget-card">
                     <div class="card-body">          

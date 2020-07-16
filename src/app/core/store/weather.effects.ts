@@ -77,7 +77,8 @@ export class WeatherEffects {
             
             return { type: WeatherActions.LOAD_DETAILS_SUCCESS, 
               payload: {
-                locationId: action.payload.id, locationName: action.payload.name, 
+                locationId: action.payload.id, 
+                locationName: action.payload.name, 
                 isFavorite: this.apiService.checkIsFavorite(action.payload.id),
                 currentCondition: {temperature: tm, tempUnit: tmUnit, weatherText: desc}} 
               }}

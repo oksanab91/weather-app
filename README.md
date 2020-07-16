@@ -8,6 +8,7 @@ The city can be searched and selected from the list.
 
 In addition, there is an option to keep favorite cities.
 
+#
 
 
 ### Main libraries and techniques:
