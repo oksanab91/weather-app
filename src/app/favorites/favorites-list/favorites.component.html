@@ -1,4 +1,8 @@
-<div class="container-fluid list-container-fluid">
+<div class="container-fluid">
+  <div class="container-header">
+    <h3>Favorites</h3>
+  </div>
+  
   <div class="row row-list">
     <ng-container *ngFor="let favorite of favorites$ | async; trackBy: trackByFn">
         <favorite [favorite]="favorite" class="col-md-2 col-sm-4 col-12 col-lg-2"></favorite>

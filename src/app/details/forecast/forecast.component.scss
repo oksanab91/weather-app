@@ -1,0 +1,15 @@
+@import "abstracts/app-variables";
+@import "components/form";
+@import "components/cards";
+
+:host {
+    margin: auto;
+}
+
+.card-wrap {
+    padding-bottom: $paddingNormal;
+}
+
+.card-block h6 {
+    font-weight: 400;
+}

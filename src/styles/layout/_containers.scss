@@ -3,8 +3,6 @@
 $mobileNavHeight: 6.6rem;
 
 .container-form {
-    @include box-shadow;
-    @include container-border;
     margin-top: $paddingNormal;
     background-color: $backgroundColorLight;        
 }
@@ -18,18 +16,21 @@ $mobileNavHeight: 6.6rem;
 .row-list {
     position: relative;    
     margin: 0;
-    padding: $paddingSmall;
 } 
 
 .nav-items {    
     list-style-type: none;
     margin: 0;    
-    padding: calc(#{$paddingSmall} * 2);
+    padding: $paddingNormal;
     
     .nav-item {        
         padding-left: $paddingSmall;
         padding-left: $paddingSmall;
     }
+}
+
+.with-background {
+    @include main-background-color;
 }
 
 .clear-all {

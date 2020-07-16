@@ -17,8 +17,9 @@ html, body {
     box-sizing: inherit;
 }
 
-.app-body {
-    background-color: #f1f1f1;
+.app-body {    
+    background-size: cover;    
+    background-image: linear-gradient(180deg, #68181e, #cd2f3b);
     height: 100%;
 }
 

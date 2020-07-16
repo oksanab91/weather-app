@@ -24,8 +24,8 @@ $modalMaxWidth: 450px;
 $modalMinWidth: 250px;
 
 
-$btnColorDark: #006097; // #0063cc;
-$btnColorLight: #0071b3;
+$btnColorDark: #91212a;
+$btnColorLight: #cd2f3b;
 $btnSecondColorDark: #595959;
 $btnWarnColor: #e74c3c;
 $btnEditColor: #26734d;
@@ -37,14 +37,16 @@ $containerMargine: 5rem;
 $mobileContainerMargine: 7rem;
 
 @mixin box-shadow {
-    // box-shadow: 0 0 30px -15px #3d4851;
-    // box-shadow: 0 5px 12px 0 rgba(61,72,81,0.4);
     box-shadow: 0 1px 10px rgba(61,72,81,0.4);
 }
 
+@mixin main-background-color {    
+    background-image: linear-gradient(180deg, #68181e, #cd2f3b);
+    background-size: cover;
+}
+
 @mixin container-border {
-    // border: 1px solid #3d4851; //rgba(0,0,0,.125);
-    border: 1px solid rgba(73, 80, 87, 0.5);
+    border: 1px solid #91212a;
 }
 
 @mixin modal-background-color {

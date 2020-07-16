@@ -6,8 +6,7 @@ $mobileCardPlusHeight: 6.7rem;
     min-width: $cardMinWidth;
     min-height: $cardMinHeight;
     height: 100%;
-    border-radius: 0px;    
-    @include box-shadow;
+    border-radius: 0px;
     @include container-border;
 }
 
@@ -26,10 +25,7 @@ $mobileCardPlusHeight: 6.7rem;
     p {
         margin: 0;
     }
-    
-    // .fa-sm {
-    //     font-size: $fontSize;
-    // }
+
 }
 
 .card-plus {
@@ -94,6 +90,9 @@ $mobileCardPlusHeight: 6.7rem;
     min-width: auto;
     min-height: auto;
     padding: $paddingNormal;
+
+    background-color: $btnColorDark;
+    color: $btnActiveColor;
 
     .card {
         border-radius: 0;

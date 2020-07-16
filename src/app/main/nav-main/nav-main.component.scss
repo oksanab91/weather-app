@@ -4,8 +4,24 @@
 :host {
     padding: 0;
     width: 100%;
+    border-bottom: $paddingSmall solid $btnColorDark;    
+    background-color: transparent;
+    color: $btnActiveColor;
 }
 
 .nav-right{
     margin-left: auto;
+    .nav-item{
+        text-align: center;
+    } 
+}
+
+.navbar-brand {    
+    font-size: 2rem;   
+}
+
+@media screen and (max-width: 800px) {
+    .navbar-brand {    
+        font-size: 20px;   
+    }
 }

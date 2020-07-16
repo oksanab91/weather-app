@@ -1,8 +1,6 @@
 @import "../abstracts/app-variables";
 
-@mixin button-hover($backgroundColor: $btnColorDark, $color: $btnActiveColor) {
-    @include box-shadow;
-    @include container-border;	
+@mixin button-hover($backgroundColor: $btnColorDark, $color: $btnActiveColor) {    
     background-color: $backgroundColor;
     color: $color;
     cursor: $cursor;
@@ -11,7 +9,6 @@
 @mixin sprite-icon($url, $left, $top) {
     width: 24px;
     height: 14px;
-    // background: url('/assets/sprite-icone.png') -281px 0;
     background: url($url) $left $top;
     display: inline-block;    
 }
@@ -76,11 +73,11 @@ a:hover {
     }
 }
 
-.btn-card-delete {    
-    @include button-round(2.8rem);        
-
-    &:hover:not([disabled]) {
-        @include button-hover($btnWarnColor);      
+.btn-card-add {    
+    @include button-round(2.8rem, $btnActiveColor);    
+        
+    &:hover{
+        @include button-hover($btnColorLight);
     }
 }
             
@@ -93,9 +90,7 @@ a:hover {
 }
 
 .btn-plus{
-    @include button-round;
-    @include container-border;
-    @include box-shadow;
+    @include button-round;    
     margin: auto;
     
     &:hover{
@@ -104,17 +99,12 @@ a:hover {
 }
 
 .btn-sm-icon {
-    padding-right: 0;
-    font-size: $fontSize;
-
     &:focus {
         border: none;
         outline: none;
         box-shadow: none;
     }
-    &:hover {
-        color: $btnWarnColor;
-    }
+   
     &:active {
         position: relative;
         top: 1px;
@@ -138,14 +128,13 @@ a:hover {
 }
 
 @media screen and (max-width: 800px) {
-    .btn-sm-icon, .btn-card-edit, .btn-card-delete, btn-close, .btn-cancel, .btn-submit {
+    .btn-sm-icon, .btn-card-edit, .btn-card-add, btn-close, .btn-cancel, .btn-submit {
         @include container-border;
     }
     
     .btn-plus-mobile{
-        @include button-round($btnDiameter, $btnActiveColor, $btnColorLight);
+        @include button-round($btnDiameter, $btnActiveColor, $btnColorDark);
         @include container-border;
-        @include box-shadow;        
             
         &:hover{
             @include button-hover($btnColorLight);
