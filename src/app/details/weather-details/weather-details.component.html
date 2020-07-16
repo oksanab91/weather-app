@@ -21,7 +21,7 @@
             </div>
         </div>
         
-        <forecast [locationId] = "details.locationId"></forecast>
+        <forecast [forecast] = "forecast$ | async"></forecast>
         
     </ng-container>
     <ng-container *ngIf="!(details$ | async)">Loading...</ng-container>

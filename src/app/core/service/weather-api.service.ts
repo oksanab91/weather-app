@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import configApi from 'src/app/config.accuweather-api'
 import { from, of, Observable, forkJoin } from 'rxjs';
 import { mergeMap, toArray, map } from 'rxjs/operators';
@@ -12,6 +12,9 @@ import { LocationShort } from 'src/app/models';
 export class WeatherApiService {  
   url: string
   isDevelopment = configApi.environment === 'dev'
+  headers: HttpHeaders = new HttpHeaders({
+    'Content-Type': 'text/plain'      
+  })
   private favoritesList: LocationShort[] = []
   
   constructor(private http: HttpClient) { }
@@ -41,7 +44,7 @@ export class WeatherApiService {
     if(this.isDevelopment) this.url = `${configApi.url_devpath}current-condition.json`
     else this.url = `http://${configApi.apiHost}/currentconditions/v1/${locationId}?apikey=${configApi.apiKey}&details=true`
     
-    return this.http.get(this.url);   
+    return this.http.get(this.url, {headers: this.headers});   
   }
 
   getFavorites(){    
@@ -64,7 +67,7 @@ export class WeatherApiService {
     if(this.isDevelopment) this.url = `${configApi.url_devpath}locations.json`
     else this.url = `http://${configApi.apiHost}/locations/v1/cities/autocomplete?apikey=${configApi.apiKey}&q=${filter}`
     
-    let data$ = this.http.get<any[]>(this.url)
+    let data$ = this.http.get<any[]>(this.url,  {headers: this.headers})
 
     if(this.isDevelopment){      
       data$ = data$.pipe(map(val => {
@@ -80,7 +83,7 @@ export class WeatherApiService {
     if(this.isDevelopment) this.url = `${configApi.url_devpath}forecast.json`
     else this.url = `http://${configApi.apiHost}/forecasts/v1/daily/5day/${locationId}?apikey=${configApi.apiKey}&details=true&metric=true`
   
-    return this.http.get(this.url);   
+    return this.http.get(this.url, {headers: this.headers});   
   }
 
 }

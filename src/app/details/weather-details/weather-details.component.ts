@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LocationWeather, LocationShort } from '@models/models';
+import { LocationWeather, LocationShort, WeatherForecast } from '@models/models';
 import { Observable } from 'rxjs';
 import { WeatherStore } from '@core/store';
 import { Location } from '@angular/common';
@@ -17,7 +17,8 @@ import { fadeInAnimation } from 'src/app/app-animations';
 export class WeatherDetailsComponent implements OnInit {
   locationInit: LocationShort = new LocationShort()  
   defaultLocation: LocationShort = {id: '215854', name: 'Tel Aviv'}
-  details$: Observable<LocationWeather>  
+  details$: Observable<LocationWeather>
+  forecast$: Observable<WeatherForecast[]>
 
   constructor(private route: ActivatedRoute, private loc:Location, private store: WeatherStore) {
     const param = this.loc.getState()
@@ -28,11 +29,13 @@ export class WeatherDetailsComponent implements OnInit {
     }
     else this.locationInit = this.defaultLocation    
 
-    this.store.loadDetails(this.locationInit)    
+    this.store.loadDetails(this.locationInit)
+    this.store.loadForecast(this.locationInit.id)   
   }
 
   ngOnInit(): void {
-    this.details$ = this.store.details$    
+    this.details$ = this.store.details$
+    this.forecast$ = this.store.forecast$    
   }
 
   updateFavorite(item: LocationWeather){       

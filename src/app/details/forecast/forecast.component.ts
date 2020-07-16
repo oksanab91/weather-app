@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, Input } from '@angular/core';
 import { WeatherForecast } from '@models/models';
 import { WeatherStore } from '@core/store';
 
@@ -8,16 +7,10 @@ import { WeatherStore } from '@core/store';
   templateUrl: './forecast.component.html',
   styleUrls: ['./forecast.component.scss']
 })
-export class ForecastComponent implements OnInit {
-  @Input()  locationId: string;
-  forecast$: Observable<WeatherForecast[]>
-
+export class ForecastComponent {
+  @Input()  forecast: WeatherForecast[]
+  
   constructor(private store: WeatherStore) {
-    this.store.loadForecast(this.locationId)
-   }
-
-  ngOnInit(): void {
-    this.forecast$ = this.store.forecast$
   }
 
   roundTemperature(temp) {
