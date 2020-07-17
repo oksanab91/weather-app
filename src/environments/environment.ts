@@ -4,7 +4,21 @@
 
 export const environment = {
   production: false,
-  apiTest: true
+  apiTest: true,
+  apis: {
+    apiKey: '',
+    apiHost: '',    
+    url_devpath: '../../assets/api-test/'
+  },
+  firebase: {
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
+  }
 };
 
 /*

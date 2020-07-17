@@ -8,7 +8,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { WeatherEffects } from '@core/store/weather.effects';
-import * as fromWeather from '@core/store/weather.reducer'
+import * as fromWeather from '@core/store/weather.reducer';
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -22,7 +26,10 @@ import * as fromWeather from '@core/store/weather.reducer'
     AppRoutingModule,   
     CoreModule,    
     StoreModule.forRoot({ weather: fromWeather.reducer }),
-    EffectsModule.forRoot([WeatherEffects])    
+    EffectsModule.forRoot([WeatherEffects]),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule    
   ],
   providers: [],
   bootstrap: [AppComponent]
