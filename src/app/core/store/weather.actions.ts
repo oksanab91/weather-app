@@ -1,12 +1,16 @@
 import { Action } from '@ngrx/store'
 import { LocationShort } from '@models/models'
 
+
 export const ADD_FAVORITES      = '[FAVORITES] Add'
 export const REMOVE_FAVORITES   = '[FAVORITES] Remove'
 export const LOAD_FAVORITES     = '[FAVORITES] Load'
 export const LOAD_DETAILS       = '[DETAILS] Load'
 export const LOAD_LOCATIONS     = '[LOCATIONS] Load'
 export const LOAD_FORECAST      = '[FORECAST] Load'
+export const SET_ALERT          = '[ALERT] Set'
+export const REMOVE_ALERT       = '[ALERT] Remove'
+export const RESET_ALERT        = '[ALERT] Reset'
 export const ADD_FAVORITES_SUCCESS      = '[FAVORITES] Add Success'
 export const REMOVE_FAVORITES_SUCCESS   = '[FAVORITES] Remove Success'
 export const LOAD_FAVORITES_SUCCESS     = '[FAVORITES] Load Success'
@@ -69,10 +73,26 @@ export class LoadForecastSuccess implements Action {
     constructor(public payload: any) {}
 }
 
+export class RemoveAlert implements Action {
+    readonly type = REMOVE_ALERT
+    constructor(public payload: any) {}
+}
+export class SetAlert implements Action {
+    readonly type = SET_ALERT
+    constructor(public payload: any) {}
+}
+export class ResetAlerts implements Action {
+    readonly type = RESET_ALERT
+    constructor() {}
+}
+
+
+
 export type Actions = 
     LoadFavorites | LoadFavoritesSuccess |
     LoadDetails | LoadDetailsSuccess |    
     AddFavorites | RemoveFavorites |
     AddFavoritesSuccess | RemoveFavoritesSuccess |
     LoadLocations | LoadLocationsSuccess |
-    LoadForecast | LoadForecastSuccess  
+    LoadForecast | LoadForecastSuccess |
+    RemoveAlert | SetAlert | ResetAlerts

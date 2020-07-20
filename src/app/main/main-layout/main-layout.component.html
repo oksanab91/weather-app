@@ -4,4 +4,5 @@
   <div class="col-12 col-md-12 col-lg-12 clear-all">
     <router-outlet></router-outlet>
   </div>
+  <app-alert [messages] = "messages$ | async"></app-alert>
 </div>

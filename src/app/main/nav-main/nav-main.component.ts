@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-main.component.scss']
 })
 export class NavMainComponent implements OnInit { 
-    
+    header = 'Herolo Weather'
   constructor() { }
 
   ngOnInit(): void {

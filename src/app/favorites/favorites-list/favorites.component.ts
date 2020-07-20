@@ -19,6 +19,7 @@ export class FavoritesComponent implements OnInit{
 
   constructor(private store: WeatherStore) {
     this.store.loadFavorites()
+    this.store.resetAlerts()
   }  
 
   ngOnInit() {    

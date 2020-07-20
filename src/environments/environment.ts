@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   apiTest: true,
   apis: {
-    apiKey: '',
-    apiHost: '',    
+    apiKey: '',    
+    api_url: 'api',   
     url_devpath: '../../assets/api-test/'
   },
   firebase: {

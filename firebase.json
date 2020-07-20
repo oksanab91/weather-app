@@ -17,8 +17,23 @@
       "headers": [ {
         "key": "Access-Control-Allow-Origin",
         "value": "*"
+      },
+      {
+        "key" : "Cache-Control",
+        "value" : "max-age=1000000"
       } ]
     }, {
+      "source": "http://dataservice.accuweather.com",
+      "headers": [ {
+        "key": "Access-Control-Allow-Origin",
+        "value": "*"
+      },
+      {
+        "key" : "Cache-Control",
+        "value" : "max-age=1000000"
+      } ]
+    },
+    {
       "source": "**/*.@(jpg|jpeg|gif|png)",
       "headers": [ {
         "key": "Cache-Control",

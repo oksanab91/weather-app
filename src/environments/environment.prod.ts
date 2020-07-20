@@ -2,8 +2,8 @@ export const environment = {
   production: true,
   apiTest: false,
   apis: {
-    apiKey: '',
-    apiHost: '',    
+    apiKey: '',    
+    api_url: '',    
     url_devpath: ''
   },
   firebase: {

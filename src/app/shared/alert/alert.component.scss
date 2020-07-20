@@ -7,10 +7,3 @@
     bottom: 0;
     right: 0;
 }
-
-
-@media screen and (max-width: 800px) {
-    .container {
-        margin-bottom: $mobileCardPlusHeight;
-    }
-}

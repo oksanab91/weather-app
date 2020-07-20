@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Favorite } from '@models/models';
-import { AlertService, HelperService } from '@core/service';
+import { HelperService } from '@core/service';
 
 @Component({
   selector: 'favorite',
@@ -10,9 +10,7 @@ import { AlertService, HelperService } from '@core/service';
 export class FavoriteComponent implements OnInit {
   @Input()  favorite: Favorite;
 
-  constructor(private alertService: AlertService, private helper: HelperService) {
-    this.alertService.reset();
-  }
+  constructor(private helper: HelperService) { }
 
   ngOnInit() {
   }

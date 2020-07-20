@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class WeatherApiService {  
-  url: string
+  url: string  
   isDevelopment = environment.apiTest
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'text/plain'      
@@ -42,30 +42,33 @@ export class WeatherApiService {
 
   getCurrentCondition(locationId: string) {    
     if(this.isDevelopment) this.url = `${environment.apis.url_devpath}current-condition.json`
-    else this.url = `https://${environment.apis.apiHost}/currentconditions/v1/${locationId}?apikey=${environment.apis.apiKey}&details=true`
+    else this.url = `${environment.apis.api_url}/currentconditions/v1/${locationId}?apikey=${environment.apis.apiKey}&details=true`
     
     return this.http.get(this.url, {headers: this.headers});   
   }
 
   getFavorites(){    
     if(this.favoritesList.length === 0) return of([])
-    
-    const favorites$ = from(this.favoritesList).pipe(
-        mergeMap((location) => {
-          return  forkJoin([
-            of(location),
-            this.getCurrentCondition(location.id)
-          ]).pipe( map(([location, weather]) => {return { location, weather }})
-          )
-        }),        
-      toArray())
 
-    return favorites$
+    try {
+      const favorites$ = from(this.favoritesList).pipe(
+          mergeMap((location) => {
+            return  forkJoin([
+              of(location),
+              this.getCurrentCondition(location.id)
+            ]).pipe( map(([location, weather]) => {return { location, weather }})
+            )
+          }),        
+        toArray())
+
+      return favorites$
+    }
+    catch(error){ return of(error) }
   }
 
   getLocations(filter: string): Observable<any[]> {    
     if(this.isDevelopment) this.url = `${environment.apis.url_devpath}locations.json`
-    else this.url = `https://${environment.apis.apiHost}/locations/v1/cities/autocomplete?apikey=${environment.apis.apiKey}&q=${filter}`
+    else this.url = `${environment.apis.api_url}/locations/v1/cities/autocomplete?apikey=${environment.apis.apiKey}&q=${filter}`
     
     let data$ = this.http.get<any[]>(this.url,  {headers: this.headers})
 
@@ -81,7 +84,7 @@ export class WeatherApiService {
 
   getForecast(locationId: string) {
     if(this.isDevelopment) this.url = `${environment.apis.url_devpath}forecast.json`
-    else this.url = `https://${environment.apis.apiHost}/forecasts/v1/daily/5day/${locationId}?apikey=${environment.apis.apiKey}&details=true&metric=true`
+    else this.url = `${environment.apis.api_url}/forecasts/v1/daily/5day/${locationId}?apikey=${environment.apis.apiKey}&details=true&metric=true`
   
     return this.http.get(this.url, {headers: this.headers});   
   }

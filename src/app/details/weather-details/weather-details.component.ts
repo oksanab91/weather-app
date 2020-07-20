@@ -37,6 +37,7 @@ export class WeatherDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.details$ = this.store.details$
     this.forecast$ = this.store.forecast$    
+    this.store.resetAlerts()
   }
 
   updateFavorite(item: LocationWeather){       

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { WeatherApiService } from '@core/service';
 import * as WeatherActions from './weather.actions';
+import { of } from 'rxjs';
 
  
 @Injectable()
@@ -17,7 +17,12 @@ export class WeatherEffects {
             return { type: WeatherActions.LOAD_LOCATIONS_SUCCESS, 
               payload: arr }}
             ),
-        catchError(() => EMPTY)
+        catchError(error => 
+        {
+          console.log(error)
+          return of({ type: WeatherActions.SET_ALERT, 
+            payload: {type: 'danger', message: 'Error loading locations'} })
+        })        
       )
     )
   ))
@@ -40,7 +45,12 @@ export class WeatherEffects {
 
             return { type: WeatherActions.LOAD_FAVORITES_SUCCESS, payload: favorites }}
             ),
-        catchError(() => EMPTY)
+        catchError(error => 
+        {
+          console.error(error.message)
+          return of({ type: WeatherActions.SET_ALERT, 
+            payload: {type: 'danger', message: 'Error loading favorites'}})
+        })
       )
     )
   ))  
@@ -49,20 +59,34 @@ export class WeatherEffects {
     ofType(WeatherActions.ADD_FAVORITES),    
     mergeMap((action: WeatherActions.AddFavorites) => this.apiService.addFavorite(action.payload)
     .pipe(
-        map(favorites => {return { type: WeatherActions.ADD_FAVORITES_SUCCESS, payload: favorites }}
+        map(result => {
+          const message = {type: 'success', message: 'Location added to the favorites'}         
+          return { type: WeatherActions.ADD_FAVORITES_SUCCESS, payload: message }}
         ),
-      catchError(() => EMPTY)
+      catchError(error => 
+      {
+        console.error(error.message)
+        return of({ type: WeatherActions.SET_ALERT, 
+        payload: {type: 'danger', message: 'Error adding favorite'} })
+      })
       )
     )
   ))
-
+  
   removeFavorites$ = createEffect(() => this.actions$.pipe(
     ofType(WeatherActions.REMOVE_FAVORITES),    
     mergeMap((action: WeatherActions.RemoveFavorites) => this.apiService.removeFavorite(action.payload)
     .pipe(
-        map(favorites => {return { type: WeatherActions.REMOVE_FAVORITES_SUCCESS, payload: favorites }}
+        map(result => {
+          const message = {type: '', message: 'Location removed from favorites'}          
+          return { type: WeatherActions.REMOVE_FAVORITES_SUCCESS, payload: message }}
         ),
-      catchError(() => EMPTY)
+        catchError(error =>
+        { 
+          console.error(error.message)
+          return of({ type: WeatherActions.SET_ALERT, 
+          payload: {type: 'danger', message: 'Error removing favorite'} })
+        })
       )
     )
   ))
@@ -85,7 +109,12 @@ export class WeatherEffects {
                 currentCondition: {temperature: tm, tempUnit: tmUnit, weatherText: desc, weatherIcon: weatherIcon}} 
               }}
             ),
-        catchError(() => EMPTY)
+        catchError(error => 
+        {
+          console.error(error.message)
+          return of({ type: WeatherActions.SET_ALERT, 
+            payload: {type: 'danger', message: 'Error loading current weather conditions'}})
+        })
       )
     )
   ))
@@ -110,7 +139,12 @@ export class WeatherEffects {
           
           return { type: WeatherActions.LOAD_FORECAST_SUCCESS, payload: daily }}
         ),
-        catchError(() => EMPTY)
+        catchError(error => 
+        {
+          console.error(error.message)
+          return of({ type: WeatherActions.SET_ALERT, 
+            payload: {type: 'danger', message: 'Error loading forecast'}})
+        })
       )
     )
   ))

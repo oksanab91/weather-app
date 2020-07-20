@@ -5,7 +5,6 @@ import { SharedModule } from '@shared/shared.module';
 import { NavSearchComponent } from './nav-search/nav-search.component';
 import { WeatherDetailsComponent } from './weather-details/weather-details.component';
 import { ForecastComponent } from './forecast/forecast.component';
-import { WeatherStore } from '@core/store';
 
 
 @NgModule({
@@ -18,7 +17,6 @@ import { WeatherStore } from '@core/store';
       CommonModule,      
       SharedModule,      
       RouterModule.forChild([{ path: '', component: WeatherDetailsComponent}])        
-    ],
-    providers: [WeatherStore]
+    ]
   })
   export class WeatherDetailsModule { }

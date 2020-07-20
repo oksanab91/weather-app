@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertService } from '@core/service';
+import { Component, Input } from '@angular/core';
 import { fadeInOutQueryAnimation } from 'src/app/app-animations';
+import { WeatherStore } from '@core/store';
+import { Alert } from 'src/app/models';
 
 
 @Component({
@@ -9,14 +10,14 @@ import { fadeInOutQueryAnimation } from 'src/app/app-animations';
   styleUrls: ['./alert.component.scss'],
   animations: [fadeInOutQueryAnimation]  
 })
-export class AlertComponent implements OnInit {
+export class AlertComponent {
+  @Input()  messages: Alert[]  
+  
+  constructor( private store: WeatherStore ) { }
 
-  constructor( public alertService: AlertService) { }
-
-  ngOnInit() {
-    
+  close(alert) {    
+    this.store.removeAlert(alert)    
   }
-
   trackByFn(index, item) {
     return index;
   }

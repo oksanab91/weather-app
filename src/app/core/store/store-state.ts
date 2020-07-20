@@ -1,4 +1,4 @@
-import {LocationWeather, Favorite, LocationShort, WeatherForecast} from '@models/models';
+import {LocationWeather, Favorite, LocationShort, WeatherForecast, Alert} from '@models/models';
 
 
   export class AppState {
@@ -7,5 +7,5 @@ import {LocationWeather, Favorite, LocationShort, WeatherForecast} from '@models
     locations: LocationShort[]
     currentLocation: LocationShort
     forecast: WeatherForecast[]
-    message: string    
+    message: Alert[] = null 
   }

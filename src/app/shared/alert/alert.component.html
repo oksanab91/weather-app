@@ -1,8 +1,8 @@
 <div class="container">
-  <div *ngFor="let alert of alertService.alerts; let i = index; trackBy: trackByFn" [@fadeInOutQueryAnimation]=''>    
+  <div *ngFor="let alert of messages let i = index; trackBy: trackByFn" [@fadeInOutQueryAnimation]=''>    
     <div class="alert alert-dismissible fade show" [ngClass]="'alert-' + (alert.type || 'warning')" role="alert">
       <span>{{alert.message}}</span>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="alertService.close()">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close(alert)">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>

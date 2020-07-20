@@ -1,17 +1,17 @@
 <div class="container">
-    <div class="row row-list">    
-        <ng-container *ngFor="let forecast of forecast; trackBy: trackByFn">            
+    <div class="row row-list">          
+        <ng-container *ngFor="let weather of forecast; trackBy: trackByFn">            
             <div class="col-sm card-wrap">
                 <div class="card widget-card">
                     <div class="card-body">          
                         <div class="card-block block-widget">
-                            <h5 class="card-title">{{forecast.day | date: "MMM d, y"}}</h5>
-                            <h6 class="card-subtitle">{{roundTemperature(forecast.temperature)}} {{forecast.tempUnit}}</h6>
+                            <h5 class="card-title">{{weather.day | date: "MMM d, y"}}</h5>
+                            <h6 class="card-subtitle">{{roundTemperature(weather.temperature)}} {{weather.tempUnit}}</h6>
                         </div>                
                         <div class="card-block">
                             <div class="card-block block-widget">                                
-                                <i class="{{setWeatherIcon(forecast.weatherIcon, forecast.temperature)}}" style="font-size: 30px;"></i>
-                                <h6 class="card-title">{{forecast.weatherText}}</h6>          
+                                <i class="{{setWeatherIcon(weather.weatherIcon, weather.temperature)}}" style="font-size: 30px;"></i>
+                                <h6 class="card-title">{{weather.weatherText}}</h6>          
                             </div>
                         </div>
                     </div>
