@@ -91,63 +91,51 @@ export class WeatherEffects {
     )
   ))
 
-  loadDetails$ = createEffect(() => this.actions$.pipe(
-    ofType(WeatherActions.LOAD_DETAILS),    
-    mergeMap((action: WeatherActions.LoadDetails) => this.apiService.getCurrentCondition(action.payload.id)
+  
+  loadWeather$ = createEffect(() => this.actions$.pipe(
+    ofType(WeatherActions.LOAD_WEATHER),    
+    mergeMap((action: WeatherActions.LoadWeather) => this.apiService.getWeather(action.payload.id)
     .pipe(
-        map(weather => {            
-            const tm = weather[0].Temperature.Metric.Value
-            const tmUnit = weather[0].Temperature.Metric.Unit
-            const desc = weather[0].WeatherText
-            const weatherIcon = weather[0].WeatherIcon
-            
-            return { type: WeatherActions.LOAD_DETAILS_SUCCESS, 
-              payload: {
-                locationId: action.payload.id, 
-                locationName: action.payload.name, 
-                isFavorite: this.apiService.checkIsFavorite(action.payload.id),
-                currentCondition: {temperature: tm, tempUnit: tmUnit, weatherText: desc, weatherIcon: weatherIcon}} 
-              }}
-            ),
-        catchError(error => 
-        {
-          console.error(error.message)
-          return of({ type: WeatherActions.SET_ALERT, 
-            payload: {type: 'danger', message: 'Error loading current weather conditions'}})
+      map(data => {
+        //weather condition            
+        const tm = data.weather[0].Temperature.Metric.Value
+        const tmUnit = data.weather[0].Temperature.Metric.Unit
+        const desc = data.weather[0].WeatherText
+        const weatherIcon = data.weather[0].WeatherIcon
+
+        //forecast
+        let daily = data.forecast['DailyForecasts']
+
+        daily = daily.map(day => {
+          const dt = day.Date
+          const tmmin = day.Temperature.Minimum.Value            
+          const tmmax = day.Temperature.Maximum.Value
+          const unit = day.Temperature.Minimum.Unit            
+          const desc = day.Day.ShortPhrase
+          const weatherIcon = day.Day.Icon
+
+          return {day: dt, temperature: (tmmax+tmmin)/2, tempUnit: unit, weatherText: desc, weatherIcon: weatherIcon}
         })
+        
+        return { type: WeatherActions.LOAD_WEATHER_SUCCESS, 
+          payload: {details: {
+            locationId: action.payload.id, 
+            locationName: action.payload.name, 
+            isFavorite: this.apiService.checkIsFavorite(action.payload.id),
+            currentCondition: {temperature: tm, tempUnit: tmUnit, weatherText: desc, weatherIcon: weatherIcon}},
+            forecast: daily 
+          }          
+          }
+        }),
+      catchError(error => 
+      {
+        console.error(error.message)
+        return of({ type: WeatherActions.SET_ALERT, 
+        payload: {type: 'danger', message: 'Error loading weather'} })
+      })
       )
     )
-  ))
-
-  loadForecast$ = createEffect(() => this.actions$.pipe(
-    ofType(WeatherActions.LOAD_FORECAST),
-    mergeMap((action: WeatherActions.LoadForecast) => this.apiService.getForecast(action.payload)
-    .pipe(
-        map(weather => {          
-          let daily = weather['DailyForecasts']
-
-          daily = daily.map(day => {
-            const dt = day.Date
-            const tmmin = day.Temperature.Minimum.Value            
-            const tmmax = day.Temperature.Maximum.Value
-            const unit = day.Temperature.Minimum.Unit            
-            const desc = day.Day.ShortPhrase
-            const weatherIcon = day.Day.Icon
-
-            return {day: dt, temperature: (tmmax+tmmin)/2, tempUnit: unit, weatherText: desc, weatherIcon: weatherIcon}
-          })
-          
-          return { type: WeatherActions.LOAD_FORECAST_SUCCESS, payload: daily }}
-        ),
-        catchError(error => 
-        {
-          console.error(error.message)
-          return of({ type: WeatherActions.SET_ALERT, 
-            payload: {type: 'danger', message: 'Error loading forecast'}})
-        })
-      )
-    )
-  ))
+  )) 
 
   constructor(
     private actions$: Actions,

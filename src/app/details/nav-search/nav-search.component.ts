@@ -42,8 +42,7 @@ export class NavSearchComponent implements OnInit, OnDestroy {
   }
 
   selectEvent(item) {
-    this.store.loadDetails(item)
-    this.store.loadForecast(item.id)
+    this.store.loadWeather(item)
   }
 
   onChangeSearch(filter: string) {    
@@ -51,7 +50,6 @@ export class NavSearchComponent implements OnInit, OnDestroy {
   }
 
   onFocused(e) {
-    // do something
   }
 
 

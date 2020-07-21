@@ -32,19 +32,15 @@ export function reducer(state: AppState = InitAppState, action: WeatherActions.A
                 favorites: [...action.payload]                
             }
 
-        case WeatherActions.LOAD_DETAILS_SUCCESS:    
+        case WeatherActions.LOAD_WEATHER_SUCCESS:    
             return {...state,
-                details: {...action.payload}            
+                details: {...action.payload.details},
+                forecast: [...action.payload.forecast]            
             }
 
         case WeatherActions.LOAD_LOCATIONS_SUCCESS:            
             return {...state,                
                 locations: [...action.payload]
-            }
-
-        case WeatherActions.LOAD_FORECAST_SUCCESS:
-            return {...state,                
-                forecast: [...action.payload]
             }
 
         case WeatherActions.REMOVE_ALERT:            

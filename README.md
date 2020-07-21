@@ -13,7 +13,7 @@ In addition, there is an option to keep favorite cities.
 
 ### Main libraries and techniques:
 
-- [Bootstrap 4](https://getbootstrap.com/docs/4.4/getting-started/introduction/) and Font Awesome Web Application icons for design and styling
+- [Bootstrap 4](https://getbootstrap.com/docs/4.4/getting-started/introduction/) and [Font Awesome Web Application icons](https://fontawesome.com/) for design and for displaying weather condition icons
 - [RxJs](https://angular.io/guide/rx-library) to get and manage data
 - [NgRx](https://ngrx.io/) for state management of the app
 - [Angular Autocomplete](https://www.npmjs.com/package/angular-ng-autocomplete) to show and select the cities from AccuWeather API 

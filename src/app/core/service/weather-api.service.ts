@@ -38,14 +38,7 @@ export class WeatherApiService {
     ...this.favoritesList.slice(ind + 1)]    
 
     return of('success')
-  }
-
-  getCurrentCondition(locationId: string) {    
-    if(this.isDevelopment) this.url = `${environment.apis.url_devpath}current-condition.json`
-    else this.url = `${environment.apis.api_url}/currentconditions/v1/${locationId}?apikey=${environment.apis.apiKey}&details=true`
-    
-    return this.http.get(this.url, {headers: this.headers});   
-  }
+  }  
 
   getFavorites(){    
     if(this.favoritesList.length === 0) return of([])
@@ -80,12 +73,24 @@ export class WeatherApiService {
       ))
     }
     return data$   
+  }  
+
+  getWeather(locationId: string) {
+    return forkJoin([this.getCurrentCondition(locationId), this.getForecast(locationId)])
+      .pipe(map(([weather, forecast]) => {return { weather, forecast }}) )   
   }
 
-  getForecast(locationId: string) {
+  private getForecast(locationId: string) {
     if(this.isDevelopment) this.url = `${environment.apis.url_devpath}forecast.json`
     else this.url = `${environment.apis.api_url}/forecasts/v1/daily/5day/${locationId}?apikey=${environment.apis.apiKey}&details=true&metric=true`
   
+    return this.http.get(this.url, {headers: this.headers});   
+  }
+  
+  private getCurrentCondition(locationId: string) {    
+    if(this.isDevelopment) this.url = `${environment.apis.url_devpath}current-condition.json`
+    else this.url = `${environment.apis.api_url}/currentconditions/v1/${locationId}?apikey=${environment.apis.apiKey}&details=true`
+    
     return this.http.get(this.url, {headers: this.headers});   
   }
 

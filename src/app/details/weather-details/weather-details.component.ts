@@ -11,8 +11,7 @@ import { HelperService } from '@core/service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './weather-details.component.html',
   styleUrls: ['./weather-details.component.scss'],
-  animations: [fadeInAnimation],
-  host: { '[@fadeInAnimation]': '' }
+  animations: [fadeInAnimation]
 })
 export class WeatherDetailsComponent implements OnInit {
   locationInit: LocationShort = new LocationShort()  
@@ -30,8 +29,7 @@ export class WeatherDetailsComponent implements OnInit {
     }
     else this.locationInit = this.defaultLocation   
 
-    this.store.loadDetails(this.locationInit)
-    this.store.loadForecast(this.locationInit.id)   
+    this.store.loadWeather(this.locationInit)  
   }
 
   ngOnInit(): void {

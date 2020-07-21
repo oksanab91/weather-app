@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './store-state';
 import { LoadFavorites, AddFavorites, RemoveFavorites, 
-  LoadDetails, LoadForecast, LoadLocations, RemoveAlert, ResetAlerts } from './weather.actions';
+  LoadLocations, RemoveAlert, ResetAlerts, LoadWeather } from './weather.actions';
 
 
 @Injectable()
@@ -28,16 +28,12 @@ export class WeatherStore {
     this.store.dispatch(new RemoveFavorites(favoriteId))
   }
 
-  loadDetails(location) {    
-    this.store.dispatch(new LoadDetails(location))
+  loadWeather(location) {
+    this.store.dispatch(new LoadWeather(location))
   }
 
   loadLocations(filter) {    
     this.store.dispatch(new LoadLocations(filter))
-  }
-
-  loadForecast(locationId) {    
-    this.store.dispatch(new LoadForecast(locationId))
   }
 
   removeAlert(alert) {    

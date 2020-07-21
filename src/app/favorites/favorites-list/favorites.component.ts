@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Favorite } from '@models/models';
-import { fadeInAnimation } from 'src/app/app-animations';
 import { Observable } from 'rxjs';
 import { WeatherStore } from '@core/store';
+import { slideListInOutAnimation } from 'src/app/app-animations/slideListInOut.animation';
 
 
 
@@ -11,8 +11,7 @@ import { WeatherStore } from '@core/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],  
-  animations: [fadeInAnimation],
-  host: { '[@fadeInAnimation]': '' }
+  animations: [slideListInOutAnimation]
 })
 export class FavoritesComponent implements OnInit{
   favorites$: Observable<Favorite[]> 
