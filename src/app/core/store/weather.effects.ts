@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap, catchError } from 'rxjs/operators';
-import { WeatherApiService } from '@core/service';
+import { WeatherApiService, HelperService } from '@core/service';
 import * as WeatherActions from './weather.actions';
 import { of } from 'rxjs';
 
@@ -34,13 +34,13 @@ export class WeatherEffects {
         map(favorites => {            
             favorites = favorites.map(data => {
               const tm = data.weather[0].Temperature.Metric.Value
-              const tmUnit = data.weather[0].Temperature.Metric.Unit            
+              const fahr = this.helper.celsius2Fahrenheit(tm)
               const desc = data.weather[0].WeatherText
-              const weatherIcon = data.weather[0].WeatherIcon
+              const weatherIcon = this.helper.setWeatherIcon(data.weather[0].WeatherIcon, tm)
 
               return {locationId: data.location.id,
                 locationName: data.location.name,    
-                currentCondition: {temperature: tm, tempUnit: tmUnit, weatherText: desc, weatherIcon: weatherIcon}}
+                currentCondition: {temperature: tm, weatherText: desc, temperatureF: fahr, weatherIcon: weatherIcon}}
             })
 
             return { type: WeatherActions.LOAD_FAVORITES_SUCCESS, payload: favorites }}
@@ -99,22 +99,19 @@ export class WeatherEffects {
       map(data => {
         //weather condition            
         const tm = data.weather[0].Temperature.Metric.Value
-        const tmUnit = data.weather[0].Temperature.Metric.Unit
+        const fahr = this.helper.celsius2Fahrenheit(tm)       
         const desc = data.weather[0].WeatherText
-        const weatherIcon = data.weather[0].WeatherIcon
+        const weatherIcon = this.helper.setWeatherIcon(data.weather[0].WeatherIcon, tm)
 
         //forecast
         let daily = data.forecast['DailyForecasts']
 
         daily = daily.map(day => {
           const dt = day.Date
-          const tmmin = day.Temperature.Minimum.Value            
-          const tmmax = day.Temperature.Maximum.Value
-          const unit = day.Temperature.Minimum.Unit            
+          const tm = (day.Temperature.Minimum.Value + day.Temperature.Maximum.Value)/2
+          const fahr = this.helper.celsius2Fahrenheit(tm)          
           const desc = day.Day.ShortPhrase
-          const weatherIcon = day.Day.Icon
-
-          return {day: dt, temperature: (tmmax+tmmin)/2, tempUnit: unit, weatherText: desc, weatherIcon: weatherIcon}
+          return {day: dt, temperature: tm, weatherText: desc, weatherIcon: weatherIcon, temperatureF: fahr}
         })
         
         return { type: WeatherActions.LOAD_WEATHER_SUCCESS, 
@@ -122,7 +119,7 @@ export class WeatherEffects {
             locationId: action.payload.id, 
             locationName: action.payload.name, 
             isFavorite: this.apiService.checkIsFavorite(action.payload.id),
-            currentCondition: {temperature: tm, tempUnit: tmUnit, weatherText: desc, weatherIcon: weatherIcon}},
+            currentCondition: {temperature: tm, weatherText: desc, weatherIcon: weatherIcon, temperatureF: fahr}},
             forecast: daily 
           }          
           }
@@ -139,6 +136,7 @@ export class WeatherEffects {
 
   constructor(
     private actions$: Actions,
-    private apiService: WeatherApiService
+    private apiService: WeatherApiService,
+    private helper: HelperService
   ) {}
 }

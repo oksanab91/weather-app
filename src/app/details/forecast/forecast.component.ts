@@ -9,6 +9,7 @@ import { HelperService } from '@core/service';
 })
 export class ForecastComponent {
   @Input()  forecast: WeatherForecast[]
+  @Input() temperatureUnit
   
   constructor(private helper: HelperService) {
   }
@@ -19,6 +20,12 @@ export class ForecastComponent {
 
   setWeatherIcon(iconNumber, temperature) {    
     return this.helper.setWeatherIcon(iconNumber, temperature)
+  }
+
+  setTemperature(weather) {
+    console.log(this.temperatureUnit.caption)
+    if(this.temperatureUnit.caption === 'Celsius') return weather.temperature
+    else return weather.temperatureF
   }
 
   trackByFn(index, item) {

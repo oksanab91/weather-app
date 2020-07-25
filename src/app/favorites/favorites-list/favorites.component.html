@@ -4,7 +4,7 @@
   </div>
   
   <div class="row row-list" *ngIf="(favorites$ | async)?.length > 0" [@slideListInOutAnimation]="(favorites$ | async)?.length">
-    <ng-container *ngFor="let favorite of favorites$ | async; trackBy: trackByFn">
+    <ng-container *ngFor="let favorite of favorites$ | async; trackBy: trackByFn;">
         <favorite [favorite]="favorite" class="col-md-2 col-sm-4 col-12 col-lg-2"></favorite>
     </ng-container>
     <ng-container *ngIf="!(favorites$ | async)">Loading...</ng-container>    

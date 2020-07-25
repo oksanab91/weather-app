@@ -6,11 +6,13 @@
                     <div class="card-body">          
                         <div class="card-block block-widget">
                             <h5 class="card-title">{{weather.day | date: "MMM d, y"}}</h5>
-                            <h6 class="card-subtitle">{{roundTemperature(weather.temperature)}} {{weather.tempUnit}}</h6>
+                            <h6 class="card-subtitle">{{roundTemperature(setTemperature(weather))}} 
+                                <span class="fas">{{temperatureUnit.icon}}</span>
+                            </h6>
                         </div>                
                         <div class="card-block">
                             <div class="card-block block-widget">                                
-                                <i class="widget-i {{setWeatherIcon(weather.weatherIcon, weather.temperature)}}"></i>
+                                <i class="widget-i {{weather.weatherIcon}}"></i>
                                 <h6 class="card-title">{{weather.weatherText}}</h6>          
                             </div>
                         </div>

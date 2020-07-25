@@ -7,5 +7,6 @@ import {LocationWeather, Favorite, LocationShort, WeatherForecast, Alert} from '
     locations: LocationShort[]
     currentLocation: LocationShort
     forecast: WeatherForecast[]
-    message: Alert[] = null 
+    message: Alert[] = null
+    tempUnit = null
   }

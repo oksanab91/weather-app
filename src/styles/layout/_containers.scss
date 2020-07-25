@@ -39,6 +39,15 @@ $mobileNavHeight: 6.6rem;
         padding-top: $paddingSmall;
         padding-bottom: $paddingSmall;
     }
+
+    .block-left {
+        text-align: start;
+    }
+
+    .row-block-right
+    {
+        justify-content: flex-end;
+    }
 }
 
 .clear-all {
@@ -56,6 +65,22 @@ $mobileNavHeight: 6.6rem;
 
     .row-list {        
         @include clear-all;
-    }   
+    }
+    
+    .container-header {
+        .container-header-block {
+            text-align: center;
+            justify-content: center;
+        }
+    
+        .block-left {
+            text-align: center;
+        }
+   
+        .row-block-right
+        {
+            justify-content: center;
+        }
+    }    
 
 }

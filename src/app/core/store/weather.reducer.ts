@@ -9,7 +9,8 @@ const InitAppState: AppState = {
     locations: [],
     currentLocation: new LocationShort(),
     forecast: [],
-    message: []
+    message: [],
+    tempUnit: {icon: '℃', caption: 'Celsius'}
 }
 
 export function reducer(state: AppState = InitAppState, action: WeatherActions.Actions) {
@@ -32,7 +33,8 @@ export function reducer(state: AppState = InitAppState, action: WeatherActions.A
                 favorites: [...action.payload]                
             }
 
-        case WeatherActions.LOAD_WEATHER_SUCCESS:    
+        case WeatherActions.LOAD_WEATHER_SUCCESS:
+            console.log(action.payload.details)    
             return {...state,
                 details: {...action.payload.details},
                 forecast: [...action.payload.forecast]            
@@ -56,6 +58,20 @@ export function reducer(state: AppState = InitAppState, action: WeatherActions.A
         case WeatherActions.RESET_ALERT:                        
             return {...state,                
                 message: []
+            }
+
+        case WeatherActions.SET_TEMP_UNIT:
+            let unit = null
+            if(action.payload === 'C') unit = {icon: '℃', caption: 'Celsius'}
+            if(action.payload === 'F') unit = {icon: '℉', caption: 'Fahrenheit'}
+            console.log(unit)
+            console.log(state.details)
+
+            return {...state,
+                tempUnit: {...unit },
+                details: {...state.details, 
+                    currentCondition: {...state.details.currentCondition, 
+                        tempUnit: action.payload}}                 
             }
 
         default:

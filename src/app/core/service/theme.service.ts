@@ -18,7 +18,7 @@ export const darkTheme = {
   '--backgroundColorPrimary': '#b35900',
   '--backgroundColorWidget': '#804000',
   '--colorWidget': '#ffffff',
-  '--activeColor': '#804000', //'#212529',
+  '--activeColor': '#804000',
   '--colorPrimary': '#ffffff'
 }
 
@@ -28,8 +28,8 @@ export const darkThemeSecondary = {
   '--colorDarkSecondary': '#ffffff',
   '--backgroundColorPrimary': '#b35900',
   '--backgroundColorWidget': '#f1f1f1',
-  '--colorWidget': '#212529',
-  '--activeColor': '#804000', //'#212529',
+  '--colorWidget': '#804000',
+  '--activeColor': '#804000',
   '--colorPrimary': '#ffffff'
 }
 
@@ -54,7 +54,7 @@ export class ThemeService {
   }
   
   setDarkTheme(): void {
-    this.setActiveTheme(darkTheme);
+    this.setActiveTheme(darkThemeSecondary);
   }
 
   setLightTheme(): void {

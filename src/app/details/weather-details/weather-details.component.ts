@@ -18,9 +18,10 @@ export class WeatherDetailsComponent implements OnInit {
   defaultLocation: LocationShort = {id: '215854', name: 'Tel Aviv'}
   details$: Observable<LocationWeather>
   forecast$: Observable<WeatherForecast[]>
+  tempUnit$: Observable<any>
+  toggleOn = false
 
-  constructor(private loc:Location, 
-              private store: WeatherStore, private helper: HelperService) {
+  constructor(private loc:Location, private store: WeatherStore) {
     const param = this.loc.getState()
 
     if(param && param['id']) {
@@ -34,7 +35,8 @@ export class WeatherDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.details$ = this.store.details$
-    this.forecast$ = this.store.forecast$    
+    this.forecast$ = this.store.forecast$
+    this.tempUnit$ = this.store.temperatureUnit$   
     this.store.resetAlerts()
   }
 
@@ -43,12 +45,22 @@ export class WeatherDetailsComponent implements OnInit {
     else this.store.addFavorite({id: item.locationId, name: item.locationName})
   }
 
-  setWeatherIcon(iconNumber, temperature) {    
-    return this.helper.setWeatherIcon(iconNumber, temperature)
+  setFavoriteIcon(isFavorite) {
+    if(isFavorite) return {icon: 'fas fa-bookmark', caption: 'Remove\nFavorite'}
+    else return {icon: 'far fa-bookmark', caption: 'Add\nFavorite'}
   }
 
-  setFavoriteIcon(isFavorite) {
-    if(isFavorite) return {icon: 'fas fa-bookmark', caption: 'Remove from Favorites'}
-    else return {icon: 'far fa-bookmark', caption: 'Add to Favorites'}
+  setTempUnit() {    
+    this.toggleOn = !this.toggleOn
+    console.log(this.toggleOn)
+
+    if (this.toggleOn) this.store.setTempUnit('F')
+    else this.store.setTempUnit('C')
+  }
+
+  setTemperature(details) {
+    console.log(this.toggleOn)
+    if(this.toggleOn) return details.currentCondition.temperatureF
+    else return details.currentCondition.temperature
   }
 }

@@ -10,6 +10,7 @@ export const LOAD_LOCATIONS     = '[LOCATIONS] Load'
 export const SET_ALERT          = '[ALERT] Set'
 export const REMOVE_ALERT       = '[ALERT] Remove'
 export const RESET_ALERT        = '[ALERT] Reset'
+export const SET_TEMP_UNIT      = '[Unit] Set'
 export const ADD_FAVORITES_SUCCESS      = '[FAVORITES] Add Success'
 export const REMOVE_FAVORITES_SUCCESS   = '[FAVORITES] Remove Success'
 export const LOAD_FAVORITES_SUCCESS     = '[FAVORITES] Load Success'
@@ -75,6 +76,10 @@ export class ResetAlerts implements Action {
     constructor() {}
 }
 
+export class SetTempUnit implements Action {
+    readonly type = SET_TEMP_UNIT
+    constructor(public payload: any) {}
+}
 
 
 export type Actions = 
@@ -83,4 +88,4 @@ export type Actions =
     AddFavoritesSuccess | RemoveFavoritesSuccess |
     LoadLocations | LoadLocationsSuccess |
     RemoveAlert | SetAlert | ResetAlerts |
-    LoadWeather | LoadWeatherSuccess
+    LoadWeather | LoadWeatherSuccess | SetTempUnit

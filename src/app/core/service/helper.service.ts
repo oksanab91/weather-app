@@ -29,4 +29,14 @@ export class HelperService {
         }
 
     }
+
+    // setWeatherUnit(unit: string) {
+    //     if(unit === 'C') return {icon: '℃', caption: 'Celsius'}
+    //     if(unit === 'F') return {icon: '℉', caption: 'Fahrenheit'}
+    // }
+
+    celsius2Fahrenheit(celsius) {
+        console.log(celsius)
+        return Math.round((celsius * 1.8) + 32)
+    }
 }
