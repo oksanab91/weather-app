@@ -3,10 +3,9 @@
 
 :host {
     padding: 0;
-    width: 100%;
-    border-bottom: $paddingSmall solid $btnColorDark;    
+    width: 100%;    
     background-color: transparent;
-    color: $btnSecondColorDark;
+    color: var($colorDarkSecondary);
 }
 
 .nav-right{
@@ -18,10 +17,4 @@
 
 .navbar-brand {    
     font-size: 2rem;   
-}
-
-@media screen and (max-width: 800px) {
-    .navbar-brand {    
-        font-size: 20px;   
-    }
 }

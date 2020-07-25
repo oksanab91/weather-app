@@ -9,14 +9,13 @@
                     <h4>{{details.currentCondition.temperature}} {{details.currentCondition.tempUnit}}</h4>                        
                 </div>
                 <div class="col-md-6 col-sm-6 col-12 col-lg-6 container-header-block">
-                    <button class="btn btn-small btn-sm-icon btn-card-add" (click)="updateFavorite(details)" aria-label="Bookmark">                           
-                        <i class="fas fa-bookmark" *ngIf="details.isFavorite"></i>
-                        <i class="far fa-bookmark" *ngIf="!details.isFavorite"></i>                                                
+                    <button class="btn btn-small btn-plus btn-plus-mobile" (click)="updateFavorite(details)" aria-label="Bookmark">                           
+                        <i class="{{setFavoriteIcon(details.isFavorite).icon}}"></i>
                     </button>
-                    <span>Add to Favorites</span>
+                    <span>{{setFavoriteIcon(details.isFavorite).caption}}</span>
                 </div>
-                <div class="col-md-12 col-sm-12 col-12 col-lg-12 container-header-block">
-                    <i class="{{setWeatherIcon(details.currentCondition.weatherIcon, details.currentCondition.temperature)}}" style="font-size: 30px;"></i>
+                <div class="col-md-12 col-sm-12 col-12 col-lg-12 container-header-block">                    
+                    <i class="widget-i {{setWeatherIcon(details.currentCondition.weatherIcon, details.currentCondition.temperature)}}"></i>                    
                     <h2>{{details.currentCondition.weatherText}}</h2>
                 </div>
             </div>

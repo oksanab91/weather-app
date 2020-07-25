@@ -7,7 +7,7 @@ html, body {
     min-width: 300px;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-    background-color: #f1f1f1;    
+    background-color: var($backgroundColorPrimary);    
     height: 100%;  
   }
 
@@ -17,8 +17,12 @@ html, body {
     box-sizing: inherit;
 }
 
+:root {
+    @include spread-map($theme-map-light);
+}
+
 .app-body {
-    background-color: #f1f1f1;    
+    background-color: var($backgroundColorPrimary);    
     height: 100%;
 }
 

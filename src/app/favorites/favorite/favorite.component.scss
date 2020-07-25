@@ -14,7 +14,7 @@
         opacity: 0.9;            
     }
     .card-link {
-        color: $btnActiveColor;
+        color: var($activeColor);
         h5 {
             font-weight: 200;
         }

@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app-start.component.scss']
 })
 export class AppStartComponent {
-  title = 'Herolo Weather App';
+  title = 'Weather App';
 
   constructor() { }
 

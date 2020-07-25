@@ -11,7 +11,7 @@ import { LocationShort } from 'src/app/models';
   styleUrls: ['./nav-search.component.scss']
 })
 export class NavSearchComponent implements OnInit, OnDestroy {
-  title: 'Herolo Weather Task'
+  title: 'Weather App'
   private searchName = new Subject<string>();
   private subscription: Subscription;
   locations$: Observable<LocationShort[]>

@@ -47,4 +47,8 @@ export class WeatherDetailsComponent implements OnInit {
     return this.helper.setWeatherIcon(iconNumber, temperature)
   }
 
+  setFavoriteIcon(isFavorite) {
+    if(isFavorite) return {icon: 'fas fa-bookmark', caption: 'Remove from Favorites'}
+    else return {icon: 'far fa-bookmark', caption: 'Add to Favorites'}
+  }
 }
