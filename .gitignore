@@ -46,9 +46,9 @@ testem.log
 .DS_Store
 Thumbs.db
 
+src/environments/
 config.accuweather-api.ts
 .firebase/
 .firebaserc
 src/404.html
-src/environments/environment.prod.ts
 src/proxy.conf.json

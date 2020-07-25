@@ -4,9 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 It is a responsive web application that shows the weather of some city.
 
-The city can be searched and selected from the list.
+The city can be searched, selected from the list and bookmarked.
 
-In addition, there is an option to keep favorite cities.
+In addition, there is an option to switch between dark and light themes.
 
 #
 
