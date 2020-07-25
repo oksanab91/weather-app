@@ -89,8 +89,8 @@ $mobileCardPlusHeight: 6.7rem;
     min-width: auto;
     min-height: auto;
     padding: $paddingNormal;
-    background-color: $btnColorDark;
-    color: $btnActiveColor;
+    background-color: var($backgroundColorWidget);
+    color: var($colorWidget);
 
     .card {
         border-radius: 0;
@@ -125,31 +125,21 @@ $mobileCardPlusHeight: 6.7rem;
 
     .block-widget {
         font-size: $widgetFontSize; 
-        padding: $paddingNormal 0;        
-    }
-
-    .btn-submit {
-        margin: auto;
+        padding: $paddingNormal 0;
     }
     
-    #accordionHeading {
-        padding-bottom: 0;
-        background-color: $btnColorDark;
-        color: $btnActiveColor;
-        opacity: 1;
-        transition: opacity 0.4s ease-in-out;
-        
-        &:hover {
-            opacity: 0.9;            
+    .card-link {
+        color: var($colorWidget);
+        h5 {
+            font-weight: 200;
         }
-        .card-link {
-            h5 {
-                font-weight: 200;
-            }
-            .card-block > h5 {
-                font-weight: 200;                
-            }
-        }        
+        .card-block > h5 {
+            font-weight: 200;                
+        }
+    }
+
+    &:hover {
+        opacity: 0.9;            
     }
 }
 

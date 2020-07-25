@@ -1,6 +1,6 @@
 @import "../abstracts/app-variables";
 
-@mixin button-hover($backgroundColor: $btnColorDark, $color: $btnActiveColor) {    
+@mixin button-hover($backgroundColor: var($colorDark), $color: var($activeColor)) {    
     background-color: $backgroundColor;
     color: $color;
     cursor: $cursor;
@@ -13,7 +13,7 @@
     display: inline-block;    
 }
 
-@mixin button-round($diameter: $btnDiameter, $color: $btnColor, $background-color: $btnColorLight) {
+@mixin button-round($diameter: $btnDiameter, $color: var($colorPrimary), $background-color: var($colorLight)) {
     background-color: $background-color;
     color: $color;
     margin-bottom: auto;
@@ -27,7 +27,7 @@
     text-decoration: none;
     transition-property: background-color, color;
     transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;     
+    transition-timing-function: ease-in-out;   
 }
 
 button {
@@ -38,40 +38,6 @@ a:hover {
     cursor: $cursor;
 }
 
-.btn-close {    
-    @include button-round(2.8rem);
-    margin-left: auto;
-    margin-bottom: auto;
-    margin-top: auto;
-    margin-right: -.5rem;    
-    padding: 1rem 1rem;
-    font-size: 1.6rem;
-    opacity: .5;
-
-    span {
-        position: absolute;
-        padding-bottom: $paddingExSm;
-    }
-    &:hover:not([disabled]) {
-        @include button-hover($btnSecondColorDark);                     
-    }
-}
-
-.btn-cancel {
-    @include button-round(2.8rem);        
-
-    &:hover:not([disabled]) {
-        @include button-hover($btnWarnColor);      
-    }
-}
-
-.btn-submit {    
-    @include button-round(2.8rem, $btnActiveColor, $btnColorDark);     
-
-    &:hover:not([disabled]) {
-        @include button-hover;      
-    }
-}
 
 .btn-card-add {    
     @include button-round(2.8rem);    
@@ -80,14 +46,6 @@ a:hover {
         @include button-hover;
     }
 }
-            
-.btn-card-edit {
-    @include button-round(2.8rem);
-
-    &:hover:not([disabled]) {
-        @include button-hover($btnEditColor);      
-    } 
-}
 
 .btn-plus{
     @include button-round;    
@@ -95,6 +53,11 @@ a:hover {
     
     &:hover{
         @include button-hover;       
+    }
+    &:focus {
+        border: none;
+        outline: none;
+        box-shadow: none;
     }
 }
 
@@ -113,29 +76,29 @@ a:hover {
 }
 
 .maps-link{
-    color: $btnColor;
+    color: var($colorPrimary);
     font-size: $fontSize;
     text-decoration: none;
 
     &:hover {
         text-decoration: none;
         cursor:$cursor;
-        color: $btnWarnColor; 
+        color: var($warnColor); 
     }
 }
 
-#save-i {
-    @include sprite-icon('/assets/sprite-icone.png', -281px, 0);    
+.widget-i {
+    font-size: 1.5rem;
 }
 
 @media screen and (max-width: 800px) {    
     
     .btn-plus-mobile{
-        @include button-round($btnDiameter, $btnActiveColor, $btnColorDark);        
+        @include button-round($btnDiameter, var($activeColor), var($colorDark));        
         @include container-border;
             
         &:hover{
-            @include button-hover($btnColorLight, $btnColorDark);
+            @include button-hover(var($colorLight), var($colorDark));
         }
     }
 }

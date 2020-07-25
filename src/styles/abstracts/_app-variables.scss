@@ -1,8 +1,5 @@
 
-$errorMessageColor: #cc0000;
 $boxShadowColor: #3d4851; // #875e5e; ??
-$backgroundColor: #f4f5f5;
-$backgroundColorLight: #ffffff;
 
 $font: "font-family: 'Open Sans', sans-serif";
 $fontSize: 16px;
@@ -23,30 +20,55 @@ $cardMinHeight: 300px;
 $modalMaxWidth: 450px;
 $modalMinWidth: 250px;
 
+$backgroundColorPrimary: --backgroundColorPrimary;
+$backgroundColorPrimaryLight: --backgroundColorPrimaryLight;
+$backgroundColorWidget: --backgroundColorWidget;
+$colorWidget: --colorWidget;
+$colorDark: --colorDark;
+$colorLight: --colorLight;
+$colorDarkSecondary: --colorDarkSecondary;
+$warnColor: --warnColor;
+$editColor: --editColor;
+$colorPrimary: --colorPrimary;
+$activeColor: --activeColor;
 
-$btnColorDark: #b35900;
-$btnColorLight: #ffe6cc;
-$btnSecondColorDark: #804000;
-$btnWarnColor: #e74c3c;
-$btnEditColor: #26734d;
-$btnColor: #212529;
-$btnActiveColor: #ffffff;
+$theme-map-light: (
+    $backgroundColorPrimary: #f1f1f1, // #f4f5f5;
+    $backgroundColorPrimaryLight: #ffffff,
+    $backgroundColorWidget: #b35900,
+    $colorWidget: #ffffff,
+    $colorDark: #b35900,
+    $colorLight: #ffe6cc,
+    $colorDarkSecondary: #804000,
+    $warnColor: #e74c3c,
+    $editColor: #26734d,
+    $colorPrimary: #212529,
+    $activeColor: #ffffff
+);
+
+$errorMessageColor: #cc0000;
 
 $btnDiameter: 3.75rem;
 $containerMargine: 5rem;
 $mobileContainerMargine: 7rem;
+
+@mixin spread-map($map: ()) {
+    @each $key, $value in $map {
+        #{$key}: $value;
+    }
+}
 
 @mixin box-shadow {
     box-shadow: 0 1px 10px rgba(61,72,81,0.4);
 }
 
 @mixin main-background-color {    
-    background-image: linear-gradient(180deg, #804000, #b35900);
+    background-image: linear-gradient(180deg, var($colorDarkSecondary), var($colorDark));
     background-size: cover;
 }
 
 @mixin container-border {
-    border: 1px solid #804d00;
+    border: 1px solid var($colorDarkSecondary);
 }
 
 @mixin modal-background-color {

@@ -6,9 +6,8 @@
 }
 
 .search-container {
-    padding: $paddingNormal;
-    padding-top: 5px;
-    background-color: $btnColorDark;
+    padding: $paddingNormal; 
+    background-color: var($colorDark);
 }
 
 .ng-autocomplete{

@@ -4,7 +4,7 @@ $mobileNavHeight: 6.6rem;
 
 .container-form {
     margin-top: $paddingNormal;
-    background-color: $backgroundColorLight;        
+    background-color: $backgroundColorPrimaryLight;        
 }
 
 .list-container-fluid {
@@ -33,7 +33,7 @@ $mobileNavHeight: 6.6rem;
     text-align: center;
     padding-top: $paddingNormal;
     padding-bottom: $paddingNormal;
-    color: $btnSecondColorDark;
+    color: var($colorDarkSecondary);
     
     .container-header-block {
         padding-top: $paddingSmall;
