@@ -14,16 +14,11 @@ export class ForecastComponent {
   constructor(private helper: HelperService) {
   }
 
-  roundTemperature(temp) {
-    return Math.round(temp)
-  }
-
   setWeatherIcon(iconNumber, temperature) {    
     return this.helper.setWeatherIcon(iconNumber, temperature)
   }
 
   setTemperature(weather) {
-    console.log(this.temperatureUnit.caption)
     if(this.temperatureUnit.caption === 'Celsius') return weather.temperature
     else return weather.temperatureF
   }

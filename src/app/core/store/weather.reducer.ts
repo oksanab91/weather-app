@@ -34,7 +34,6 @@ export function reducer(state: AppState = InitAppState, action: WeatherActions.A
             }
 
         case WeatherActions.LOAD_WEATHER_SUCCESS:
-            console.log(action.payload.details)    
             return {...state,
                 details: {...action.payload.details},
                 forecast: [...action.payload.forecast]            
@@ -64,14 +63,11 @@ export function reducer(state: AppState = InitAppState, action: WeatherActions.A
             let unit = null
             if(action.payload === 'C') unit = {icon: '℃', caption: 'Celsius'}
             if(action.payload === 'F') unit = {icon: '℉', caption: 'Fahrenheit'}
-            console.log(unit)
-            console.log(state.details)
 
             return {...state,
                 tempUnit: {...unit },
                 details: {...state.details, 
-                    currentCondition: {...state.details.currentCondition, 
-                        tempUnit: action.payload}}                 
+                    currentCondition: {...state.details.currentCondition}}                 
             }
 
         default:

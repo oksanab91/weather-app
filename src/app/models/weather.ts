@@ -8,7 +8,6 @@ export class LocationWeather {
 export class WeatherCondition {
     temperature: number
     temperatureF: number
-    tempUnit: string
     weatherText: string
     weatherIcon: number
 }
@@ -17,7 +16,6 @@ export class WeatherForecast {
     day: string
     temperature: number
     temperatureF: number
-    tempUnit: string
     weatherText: string
     weatherIcon: number
 }

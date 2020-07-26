@@ -6,7 +6,7 @@ It is a responsive web application that shows the weather of some city.
 
 The city can be searched, selected from the list and bookmarked.
 
-In addition, there is an option to switch between dark and light themes.
+There is an option to switch between Celsius and Fahrenheit temperature units and show the app in dark or light themes.
 
 #
 

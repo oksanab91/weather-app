@@ -33,8 +33,8 @@ export class WeatherEffects {
     .pipe(
         map(favorites => {            
             favorites = favorites.map(data => {
-              const tm = data.weather[0].Temperature.Metric.Value
-              const fahr = this.helper.celsius2Fahrenheit(tm)
+              const tm = Math.round(data.weather[0].Temperature.Metric.Value)
+              const fahr = Math.round(data.weather[0].Temperature.Imperial.Value)
               const desc = data.weather[0].WeatherText
               const weatherIcon = this.helper.setWeatherIcon(data.weather[0].WeatherIcon, tm)
 
@@ -97,9 +97,9 @@ export class WeatherEffects {
     mergeMap((action: WeatherActions.LoadWeather) => this.apiService.getWeather(action.payload.id)
     .pipe(
       map(data => {
-        //weather condition            
-        const tm = data.weather[0].Temperature.Metric.Value
-        const fahr = this.helper.celsius2Fahrenheit(tm)       
+        //weather condition           
+        const tm = Math.round(data.weather[0].Temperature.Metric.Value)
+        const fahr = Math.round(data.weather[0].Temperature.Imperial.Value)
         const desc = data.weather[0].WeatherText
         const weatherIcon = this.helper.setWeatherIcon(data.weather[0].WeatherIcon, tm)
 
@@ -108,9 +108,11 @@ export class WeatherEffects {
 
         daily = daily.map(day => {
           const dt = day.Date
-          const tm = (day.Temperature.Minimum.Value + day.Temperature.Maximum.Value)/2
-          const fahr = this.helper.celsius2Fahrenheit(tm)          
+          const tm = Math.round((day.Temperature.Minimum.Value + day.Temperature.Maximum.Value)/2)
+          const fahr = this.helper.celsius2Fahrenheit(tm)           
+          const weatherIcon = this.helper.setWeatherIcon(day.Day.Icon, tm)          
           const desc = day.Day.ShortPhrase
+
           return {day: dt, temperature: tm, weatherText: desc, weatherIcon: weatherIcon, temperatureF: fahr}
         })
         

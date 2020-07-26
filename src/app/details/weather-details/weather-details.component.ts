@@ -52,14 +52,12 @@ export class WeatherDetailsComponent implements OnInit {
 
   setTempUnit() {    
     this.toggleOn = !this.toggleOn
-    console.log(this.toggleOn)
 
     if (this.toggleOn) this.store.setTempUnit('F')
     else this.store.setTempUnit('C')
   }
 
   setTemperature(details) {
-    console.log(this.toggleOn)
     if(this.toggleOn) return details.currentCondition.temperatureF
     else return details.currentCondition.temperature
   }
