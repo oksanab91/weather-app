@@ -98,7 +98,7 @@ a:hover {
         @include container-border;
             
         &:hover{
-            @include button-hover(var($colorLight), var($colorDark));
+            @include button-hover(var($colorLight), var($colorDarkSecondary));
         }
     }
 }

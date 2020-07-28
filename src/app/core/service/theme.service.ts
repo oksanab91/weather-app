@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '@env';
 
 export const lightTheme = {
   '--colorDark': '#b35900',
@@ -6,38 +7,22 @@ export const lightTheme = {
   '--colorDarkSecondary': '#804000',
   '--backgroundColorPrimary': '#f1f1f1',
   '--backgroundColorWidget': '#b35900',
+  '--backgroundColorNavSearch': '#b35900',
   '--colorWidget': '#ffffff',
   '--activeColor': '#ffffff',
   '--colorPrimary': '#212529'
 }
 
 export const darkTheme = {
-  '--colorDark': '#f1f1f1',
-  '--colorLight': '#804000',
+  '--colorDark': '#C6BC9F',
+  '--colorLight': '#80734D',
   '--colorDarkSecondary': '#ffffff',
-  '--backgroundColorPrimary': '#b35900',
-  '--backgroundColorWidget': '#804000',
-  '--colorWidget': '#ffffff',
-  '--activeColor': '#804000',
+  '--backgroundColorPrimary': '#001A33',
+  '--backgroundColorWidget': '#CCCCFF',
+  '--backgroundColorNavSearch': '#001A33',
+  '--colorWidget': '#212529',
+  '--activeColor': '#001A33',
   '--colorPrimary': '#ffffff'
-}
-
-export const darkThemeSecondary = {
-  '--colorDark': '#f1f1f1',
-  '--colorLight': '#804000',
-  '--colorDarkSecondary': '#ffffff',
-  '--backgroundColorPrimary': '#b35900',
-  '--backgroundColorWidget': '#f1f1f1',
-  '--colorWidget': '#804000',
-  '--activeColor': '#804000',
-  '--colorPrimary': '#ffffff'
-}
-
-export const greenTheme = {
-  '--colorDark': '#1f601f',
-  '--ColorLight': '#b3e6b3',
-  '--colorDarkSecondary': '#001a00',
-  '--backgroundColorWidget': '#1f601f'
 }
 
 
@@ -45,7 +30,8 @@ export const greenTheme = {
   providedIn: 'root'
 })
 export class ThemeService { 
-  private availableThemes = [lightTheme, darkTheme, darkThemeSecondary];
+  private availableThemes = [lightTheme, darkTheme];
+  private activeThemeDark = environment.theme === 'darkTheme'
 
   constructor() { }
 
@@ -53,13 +39,11 @@ export class ThemeService {
     return this.availableThemes;
   }
   
-  setDarkTheme(): void {
-    this.setActiveTheme(darkThemeSecondary);
+  switchTheme(): void {
+    this.activeThemeDark = !this.activeThemeDark
+    if(this.activeThemeDark) this.setActiveTheme(darkTheme)
+    else this.setActiveTheme(lightTheme)
   }
-
-  setLightTheme(): void {
-    this.setActiveTheme(lightTheme);
-  }  
 
   setActiveTheme(theme): void {
     Object.keys(theme).forEach(k =>

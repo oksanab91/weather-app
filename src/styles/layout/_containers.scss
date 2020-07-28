@@ -2,11 +2,6 @@
 
 $mobileNavHeight: 6.6rem;
 
-.container-form {
-    margin-top: $paddingNormal;
-    background-color: $backgroundColorPrimaryLight;        
-}
-
 .list-container-fluid {
     padding: 0;
     position: absolute;
@@ -54,11 +49,7 @@ $mobileNavHeight: 6.6rem;
     @include clear-all;
 }
 
-@media screen and (max-width: 990px) {
-    .container-form {
-        margin-top: 0;
-    }
-
+@media screen and (max-width: 990px) {    
     .list-container-fluid {
         top: $mobileContainerMargine;
     }

@@ -18,7 +18,8 @@ export const environment = {
     storageBucket: "",
     messagingSenderId: "",
     appId: ""
-  }
+  },
+  theme: 'lightTheme'
 };
 
 /*

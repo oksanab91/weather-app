@@ -17,9 +17,7 @@ export class NavMainComponent implements OnInit {
 
   toggleTheme() {
     this.toggleOn = !this.toggleOn
-
-    if (this.toggleOn) this.themeService.setDarkTheme()      
-    else this.themeService.setLightTheme()    
+    this.themeService.switchTheme()
   }
 
   setToggleIcon() {

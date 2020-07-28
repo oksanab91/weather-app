@@ -21,8 +21,8 @@ $modalMaxWidth: 450px;
 $modalMinWidth: 250px;
 
 $backgroundColorPrimary: --backgroundColorPrimary;
-$backgroundColorPrimaryLight: --backgroundColorPrimaryLight;
 $backgroundColorWidget: --backgroundColorWidget;
+$backgroundColorNavSearch: --backgroundColorNavSearch;
 $colorWidget: --colorWidget;
 $colorDark: --colorDark;
 $colorLight: --colorLight;
@@ -34,8 +34,8 @@ $activeColor: --activeColor;
 
 $theme-map-light: (
     $backgroundColorPrimary: #f1f1f1, // #f4f5f5;
-    $backgroundColorPrimaryLight: #ffffff,
     $backgroundColorWidget: #b35900,
+    $backgroundColorNavSearch: #b35900,
     $colorWidget: #ffffff,
     $colorDark: #b35900,
     $colorLight: #ffe6cc,
@@ -46,6 +46,20 @@ $theme-map-light: (
     $activeColor: #ffffff
 );
 
+$theme-map-dark: (
+    $colorDark: #C6BC9F,
+    $colorLight: #80734D,
+    $colorDarkSecondary: #ffffff,
+    $backgroundColorPrimary: #001A33,    
+    $backgroundColorWidget: #CCCCFF,
+    $backgroundColorNavSearch: #001A33,
+    $colorWidget: #212529,
+    $activeColor: #001A33,
+    $colorPrimary: #ffffff,
+    $warnColor: #e74c3c,
+    $editColor: #26734d,  
+);
+  
 $errorMessageColor: #cc0000;
 
 $btnDiameter: 3.75rem;
