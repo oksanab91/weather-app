@@ -299,6 +299,50 @@
             "ID": "AA",
             "LocalizedName": "Greater Accra"
         }
-    } 
-
+    },
+    {
+      "Version": 1,
+      "Key": "328328",
+      "Type": "City",
+      "Rank": 10,
+      "LocalizedName": "London",
+      "Country": {
+          "ID": "GB",
+          "LocalizedName": "United Kingdom"
+      },
+      "AdministrativeArea": {
+          "ID": "LND",
+          "LocalizedName": "London"
+      }
+    },
+    {
+      "Version": 1,
+      "Key": "561295",
+      "Type": "City",
+      "Rank": 55,
+      "LocalizedName": "Moskvorechye-Saburovo",
+      "Country": {
+          "ID": "RU",
+          "LocalizedName": "Russia"
+      },
+      "AdministrativeArea": {
+          "ID": "MOW",
+          "LocalizedName": "Moscow"
+      }
+    },
+    {
+      "Version": 1,
+      "Key": "22889",
+      "Type": "City",
+      "Rank": 11,
+      "LocalizedName": "Sydney",
+      "Country": {
+          "ID": "AU",
+          "LocalizedName": "Australia"
+      },
+      "AdministrativeArea": {
+          "ID": "NSW",
+          "LocalizedName": "New South Wales"
+      }
+    }
   ]

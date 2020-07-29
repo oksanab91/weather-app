@@ -1,41 +1,41 @@
 <nav-search></nav-search>
 
 <div class="container-fluid" [@fadeInAnimation]=''>
-    <ng-container *ngIf="(details$ | async) as details">
+    <ng-container *ngIf="(combined$ | async) as details">
         <div class="container container-header">
             <div class="row">                
                 <div class="col-sm container-header-block block-left">
-                    <h3>{{details.locationName}}</h3>
-                    <h4>{{setTemperature(details)}} 
-                        <span class="fas">{{(tempUnit$ | async)?.icon}}</span>
+                    <h3>{{details.detail.locationName}}</h3>
+                    <h4>{{setTemperature(details.detail, details.unit)}} 
+                        <span class="fas">{{details.unit.icon}}</span>
                     </h4>                        
                 </div>
                 <div class="col-sm container-header-block">
                     <div class="row row-block-right">
                         <div class="col-sm-3 col-3 col-lg-2">
-                            <button class="btn btn-small btn-plus btn-plus-mobile" (click)="setTempUnit()" aria-label="Bookmark">
-                                <span class="fas">{{(tempUnit$ | async)?.icon}}</span>
+                            <button class="btn btn-small btn-plus btn-plus-mobile" (click)="switchTempUnit(details.unit)" aria-label="Temperature unit">
+                                <span class="fas">{{details.unit.icon}}</span>
                             </button>
-                            <span>{{(tempUnit$ | async)?.caption}}</span>
+                            <span>{{details.unit.caption}}</span>
                         </div>
                         <div class="col-sm-3 col-3 col-lg-2">
-                            <button class="btn btn-small btn-plus btn-plus-mobile" (click)="updateFavorite(details)" aria-label="Bookmark">                           
-                                <i class="{{setFavoriteIcon(details.isFavorite).icon}}"></i>
+                            <button class="btn btn-small btn-plus btn-plus-mobile" (click)="updateFavorite(details.detail)" aria-label="Bookmark">                           
+                                <i class="{{setFavoriteIcon(details.detail.isFavorite).icon}}"></i>
                             </button>
-                            <span>{{setFavoriteIcon(details.isFavorite).caption}}</span>
+                            <span>{{setFavoriteIcon(details.detail.isFavorite).caption}}</span>
                         </div>
                     </div>                    
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-12 col-lg-12 container-header-block">                    
-                    <i class="widget-i {{details.currentCondition.weatherIcon}}"></i>                    
-                    <h2>{{details.currentCondition.weatherText}}</h2>
+                    <i class="widget-i {{details.detail.currentCondition.weatherIcon}}"></i>                    
+                    <h2>{{details.detail.currentCondition.weatherText}}</h2>
                 </div>
             </div>
         </div>
         
-        <forecast [forecast] = "forecast$ | async" [temperatureUnit] = "tempUnit$ | async"></forecast>
+        <forecast [forecast] = "details.forecast" [temperatureUnit] = "details.unit"></forecast>
         
     </ng-container>
-    <ng-container *ngIf="!(details$ | async)">Loading...</ng-container>
+    <ng-container *ngIf="!(combined$ | async)">Loading...</ng-container>
 </div>

@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { LocationWeather, LocationShort, WeatherForecast } from '@models/models';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { WeatherStore } from '@core/store';
 import { Location } from '@angular/common';
 import { fadeInAnimation } from 'src/app/app-animations';
-import { HelperService } from '@core/service';
+
 
 @Component({
   selector: 'weather-details',
@@ -19,8 +19,7 @@ export class WeatherDetailsComponent implements OnInit {
   details$: Observable<LocationWeather>
   forecast$: Observable<WeatherForecast[]>
   tempUnit$: Observable<any>
-  toggleOn = false
-
+  
   constructor(private loc:Location, private store: WeatherStore) {
     const param = this.loc.getState()
 
@@ -36,10 +35,18 @@ export class WeatherDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.details$ = this.store.details$
     this.forecast$ = this.store.forecast$
-    this.tempUnit$ = this.store.temperatureUnit$   
+    this.tempUnit$ = this.store.temperatureUnit$      
     this.store.resetAlerts()
   }
 
+  get combined$(){
+    return combineLatest(
+      this.details$,
+      this.forecast$,
+      this.tempUnit$,
+      (detail, forecast, unit) => {return {detail, forecast, unit}})  
+  }
+  
   updateFavorite(item: LocationWeather){       
     if(item.isFavorite) this.store.removeFavorite(item.locationId)
     else this.store.addFavorite({id: item.locationId, name: item.locationName})
@@ -50,15 +57,14 @@ export class WeatherDetailsComponent implements OnInit {
     else return {icon: 'far fa-bookmark', caption: 'Add\nFavorite'}
   }
 
-  setTempUnit() {    
-    this.toggleOn = !this.toggleOn
-
-    if (this.toggleOn) this.store.setTempUnit('F')
-    else this.store.setTempUnit('C')
+  switchTempUnit(unit) {
+    let currentUnit = 'C'
+    if(unit.caption == 'Celsius') currentUnit = 'F'
+    this.store.setTempUnit(currentUnit)
   }
 
-  setTemperature(details) {
-    if(this.toggleOn) return details.currentCondition.temperatureF
-    else return details.currentCondition.temperature
+  setTemperature(details, unit) {
+    if(unit.caption == 'Celsius') return details.currentCondition.temperature
+    else return details.currentCondition.temperatureF
   }
 }
