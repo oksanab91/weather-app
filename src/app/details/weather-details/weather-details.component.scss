@@ -10,6 +10,10 @@
     }       
 }
 
+.card-link:hover {
+        opacity: 0.9;
+}
+
 @media screen and (max-width: 800px) {
     .container-fluid {
         padding: 0;

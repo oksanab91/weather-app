@@ -10,7 +10,8 @@ const InitAppState: AppState = {
     currentLocation: new LocationShort(),
     forecast: [],
     message: [],
-    tempUnit: {icon: '℃', caption: 'Celsius'}
+    tempUnit: {icon: '℃', caption: 'Celsius'},
+    astr: {}
 }
 
 export function reducer(state: AppState = InitAppState, action: WeatherActions.Actions) {
@@ -68,6 +69,11 @@ export function reducer(state: AppState = InitAppState, action: WeatherActions.A
                 tempUnit: {...unit },
                 details: {...state.details, 
                     currentCondition: {...state.details.currentCondition}}                 
+            }
+
+        case WeatherActions.LOAD_ASTR_SUCCESS:     
+            return {...state,                
+                astr: {...action.payload}
             }
 
         default:

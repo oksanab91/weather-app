@@ -134,7 +134,45 @@ export class WeatherEffects {
       })
       )
     )
-  )) 
+  ))
+
+  loadAstrConditions$ = createEffect(() => this.actions$.pipe(
+    ofType(WeatherActions.LOAD_ASTR),
+    mergeMap((action: WeatherActions.LoadAstr) => this.apiService.getAstrCondition()
+    .pipe(
+        map(conditions => {            
+            const data = conditions['near_earth_objects']
+            let arr = []
+
+            for (let date in data){
+              let theDate = data[date]
+              
+              theDate = theDate.map(element => {
+                return {
+                  id: element.id,
+                  name: element.name,
+                  hazardous: element.is_potentially_hazardous_asteroid,
+                  dateFull: element.close_approach_data[0].close_approach_date_full,
+                  diameterMin: Math.round(element.estimated_diameter.meters.estimated_diameter_min),
+                  missDistance: Math.round(element.close_approach_data[0].miss_distance.kilometers)
+                }
+              })
+              theDate = theDate.filter(val => val.hazardous)
+              arr = [...arr, ...theDate]
+            }
+
+            arr.sort((a, b) => (a.missDistance - b.missDistance))          
+            return { type: WeatherActions.LOAD_ASTR_SUCCESS, payload: arr.length>0 ? arr[0] : {} }}
+          ),
+        catchError(error => 
+        {
+          console.log(error)
+          return of({ type: WeatherActions.SET_ALERT, 
+            payload: {type: 'danger', message: 'Error loading astr.'} })
+        })        
+      )
+    )
+  ))
 
   constructor(
     private actions$: Actions,

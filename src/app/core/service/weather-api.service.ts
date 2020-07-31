@@ -4,6 +4,7 @@ import { from, of, Observable, forkJoin } from 'rxjs';
 import { mergeMap, toArray, map } from 'rxjs/operators';
 import { LocationShort } from 'src/app/models';
 import { environment } from 'src/environments/environment';
+import { HelperService } from './helper.service';
 
 
 @Injectable({
@@ -17,8 +18,13 @@ export class WeatherApiService {
   })
   private favoritesList: LocationShort[] = []
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private helper: HelperService) { }
 
+  setHeaders() {
+    this.headers = new HttpHeaders({
+      'Content-Type': 'text/plain'      
+    })
+  }
   checkIsFavorite(locationId){
     return this.favoritesList.findIndex(fav => fav.id == locationId) >= 0
   }
@@ -59,7 +65,8 @@ export class WeatherApiService {
     catch(error){ return of(error) }
   }
 
-  getLocations(filter: string): Observable<any[]> {    
+  getLocations(filter: string): Observable<any[]> {
+    this.setHeaders()    
     if(this.isDevelopment) this.url = `${environment.apis.url_devpath}locations.json`
     else this.url = `${environment.apis.api_url}/locations/v1/cities/autocomplete?apikey=${environment.apis.apiKey}&q=${filter}`
     
@@ -81,17 +88,32 @@ export class WeatherApiService {
   }
 
   private getForecast(locationId: string) {
+    this.setHeaders()
     if(this.isDevelopment) this.url = `${environment.apis.url_devpath}forecast.json`
     else this.url = `${environment.apis.api_url}/forecasts/v1/daily/5day/${locationId}?apikey=${environment.apis.apiKey}&details=true&metric=true`
   
     return this.http.get(this.url, {headers: this.headers});   
   }
   
-  private getCurrentCondition(locationId: string) {    
+  private getCurrentCondition(locationId: string) {
+    this.setHeaders()    
     if(this.isDevelopment) this.url = `${environment.apis.url_devpath}current-condition.json`
     else this.url = `${environment.apis.api_url}/currentconditions/v1/${locationId}?apikey=${environment.apis.apiKey}&details=true`
     
     return this.http.get(this.url, {headers: this.headers});   
+  }
+
+  getAstrCondition() {
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json'      
+    })
+    const date = new Date()
+    const currentDate = date.getFullYear() + "-" + this.helper.appendLeadingZeroes(date.getMonth() + 1) + "-" + this.helper.appendLeadingZeroes(date.getDate())
+
+    if(this.isDevelopment) this.url = `${environment.apis.url_devpath}astr.json`
+    else this.url = `${environment.apis.n_api_url}/neo/rest/v1/feed?start_date=${currentDate}&end_date=${currentDate}&api_key=${environment.apis.n_apiKey}`
+    
+    return this.http.get(this.url, {headers: this.headers});
   }
 
 }

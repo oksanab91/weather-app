@@ -9,4 +9,5 @@ import {LocationWeather, Favorite, LocationShort, WeatherForecast, Alert} from '
     forecast: WeatherForecast[]
     message: Alert[] = null
     tempUnit = null
+    astr = null
   }

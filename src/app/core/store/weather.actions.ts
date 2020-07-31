@@ -7,6 +7,7 @@ export const REMOVE_FAVORITES   = '[FAVORITES] Remove'
 export const LOAD_FAVORITES     = '[FAVORITES] Load'
 export const LOAD_WEATHER       = '[WEATHER] Load'
 export const LOAD_LOCATIONS     = '[LOCATIONS] Load'
+export const LOAD_ASTR          = '[ASTR] Load'
 export const SET_ALERT          = '[ALERT] Set'
 export const REMOVE_ALERT       = '[ALERT] Remove'
 export const RESET_ALERT        = '[ALERT] Reset'
@@ -16,6 +17,7 @@ export const REMOVE_FAVORITES_SUCCESS   = '[FAVORITES] Remove Success'
 export const LOAD_FAVORITES_SUCCESS     = '[FAVORITES] Load Success'
 export const LOAD_WEATHER_SUCCESS       = '[WEATHER] Load Success'
 export const LOAD_LOCATIONS_SUCCESS     = '[LOCATIONS] Load Success'
+export const LOAD_ASTR_SUCCESS          = '[ASTR] Load Success'
 
 
 
@@ -81,6 +83,14 @@ export class SetTempUnit implements Action {
     constructor(public payload: any) {}
 }
 
+export class LoadAstr implements Action {
+    readonly type = LOAD_ASTR
+    constructor() {}
+}
+export class LoadAstrSuccess implements Action {
+    readonly type = LOAD_ASTR_SUCCESS
+    constructor(public payload: any) {}
+}
 
 export type Actions = 
     LoadFavorites | LoadFavoritesSuccess |
@@ -88,4 +98,5 @@ export type Actions =
     AddFavoritesSuccess | RemoveFavoritesSuccess |
     LoadLocations | LoadLocationsSuccess |
     RemoveAlert | SetAlert | ResetAlerts |
-    LoadWeather | LoadWeatherSuccess | SetTempUnit
+    LoadWeather | LoadWeatherSuccess | SetTempUnit |
+    LoadAstr | LoadAstrSuccess

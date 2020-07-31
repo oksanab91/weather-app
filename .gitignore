@@ -46,6 +46,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
+src/assets
 src/environments/
 config.accuweather-api.ts
 .firebase/

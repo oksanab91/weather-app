@@ -2,8 +2,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { LocationWeather, LocationShort, WeatherForecast } from '@models/models';
 import { Observable, combineLatest } from 'rxjs';
 import { WeatherStore } from '@core/store';
-import { Location } from '@angular/common';
+import { Location, registerLocaleData } from '@angular/common';
 import { fadeInAnimation } from 'src/app/app-animations';
+import en from '@angular/common/locales/en';
 
 
 @Component({
@@ -19,6 +20,8 @@ export class WeatherDetailsComponent implements OnInit {
   details$: Observable<LocationWeather>
   forecast$: Observable<WeatherForecast[]>
   tempUnit$: Observable<any>
+  astrConditions$: Observable<any>
+  showAstr = false
   
   constructor(private loc:Location, private store: WeatherStore) {
     const param = this.loc.getState()
@@ -29,14 +32,22 @@ export class WeatherDetailsComponent implements OnInit {
     }
     else this.locationInit = this.defaultLocation   
 
-    this.store.loadWeather(this.locationInit)  
+    this.store.loadWeather(this.locationInit)
+    this.store.loadAstrConditions()  
   }
 
   ngOnInit(): void {
+    registerLocaleData(en)
+    
     this.details$ = this.store.details$
     this.forecast$ = this.store.forecast$
-    this.tempUnit$ = this.store.temperatureUnit$      
+    this.tempUnit$ = this.store.temperatureUnit$
+    this.astrConditions$ = this.store.astrConditions$      
     this.store.resetAlerts()
+  }
+
+  collapse() {
+    this.showAstr = !this.showAstr;
   }
 
   get combined$(){
@@ -44,7 +55,8 @@ export class WeatherDetailsComponent implements OnInit {
       this.details$,
       this.forecast$,
       this.tempUnit$,
-      (detail, forecast, unit) => {return {detail, forecast, unit}})  
+      this.astrConditions$,
+      (detail, forecast, unit, astr) => {return {detail, forecast, unit, astr}})  
   }
   
   updateFavorite(item: LocationWeather){       
@@ -66,5 +78,10 @@ export class WeatherDetailsComponent implements OnInit {
   setTemperature(details, unit) {
     if(unit.caption == 'Celsius') return details.currentCondition.temperature
     else return details.currentCondition.temperatureF
+  }
+
+  setAstr(astr) {
+    if(astr) return 'fas fa-meteor'
+    else return ''
   }
 }

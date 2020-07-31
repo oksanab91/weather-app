@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './store-state';
 import { LoadFavorites, AddFavorites, RemoveFavorites, 
-  LoadLocations, RemoveAlert, ResetAlerts, LoadWeather, SetTempUnit } from './weather.actions';
+  LoadLocations, RemoveAlert, ResetAlerts, LoadWeather, SetTempUnit, LoadAstr } from './weather.actions';
 
 
 @Injectable()
@@ -13,6 +13,7 @@ export class WeatherStore {
   locations$ = this.store.select(state => state['weather'].locations)
   messages$ = this.store.select(state => state['weather'].message)
   temperatureUnit$ = this.store.select(state => state['weather'].tempUnit)
+  astrConditions$ = this.store.select(state => state['weather'].astr)
 
       
   constructor(private store: Store<AppState>) {}
@@ -49,4 +50,7 @@ export class WeatherStore {
     this.store.dispatch(new SetTempUnit(unit))
   }
  
+  loadAstrConditions() {    
+    this.store.dispatch(new LoadAstr())
+  }
 }

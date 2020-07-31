@@ -34,4 +34,11 @@ export class HelperService {
     celsius2Fahrenheit(celsius) {
         return Math.round((celsius * 1.8) + 32)
     }
+
+    appendLeadingZeroes(n) {
+        if(n <= 9){
+          return "0" + n;
+        }
+        return n
+    }
 }

@@ -3,7 +3,9 @@ export const environment = {
   apiTest: false,
   apis: {
     apiKey: "",
-    api_url: "",    
+    api_url: "",
+    n_api_url: "",
+    n_apiKey: "",  
     url_devpath: ""
   },
   firebase: {

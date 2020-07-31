@@ -16,7 +16,7 @@ export const lightTheme = {
 export const darkTheme = {
   '--colorDark': '#C6BC9F',
   '--colorLight': '#80734D',
-  '--colorDarkSecondary': '#ffffff',
+  '--colorDarkSecondary': '#ebe9e0',
   '--backgroundColorPrimary': '#001A33',
   '--backgroundColorWidget': '#CCCCFF',
   '--backgroundColorNavSearch': '#001A33',
