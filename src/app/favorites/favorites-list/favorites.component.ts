@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { Favorite } from '@models/models';
+import { LocationDetails } from '@models/models';
 import { Observable } from 'rxjs';
 import { WeatherStore } from '@core/store';
 import { slideListInOutAnimation } from 'src/app/app-animations/slideListInOut.animation';
@@ -14,7 +14,7 @@ import { slideListInOutAnimation } from 'src/app/app-animations/slideListInOut.a
   animations: [slideListInOutAnimation]
 })
 export class FavoritesComponent implements OnInit{
-  favorites$: Observable<Favorite[]> 
+  favorites$: Observable<LocationDetails[]> 
 
   constructor(private store: WeatherStore) {
     this.store.loadFavorites()
@@ -26,7 +26,7 @@ export class FavoritesComponent implements OnInit{
   }
 
   trackByFn(index, item) {
-    return item.id
+    return item.locationId
   }
   
 }

@@ -3,21 +3,8 @@
     [routerLink]="['/home/details']" 
     [state]="{ id:favorite.locationId , name:favorite.locationName}" aria-label="Details">
 
-    <div class="card-body">          
-      <div class="card-block block-widget">
-        <i class="fas fa-star fa-sm widget-i"></i>
-        <h5 class="card-title">{{favorite.locationName}}</h5>
-        <h6 class="card-subtitle">{{setTemperature(tempUnit$ | async)}} 
-          <span class="fas">{{(tempUnit$ | async)?.icon}}</span>
-        </h6>        
-      </div>
-
-      <div class="card-block">
-        <div class="card-block block-widget">
-          <i class="{{favorite.currentCondition.weatherIcon}} widget-i"></i>
-          <h6 class="card-title">{{favorite.currentCondition.weatherText}}</h6>          
-        </div>
-      </div>
-    </div>
-    </a>
+    <i class="fas fa-star fa-sm widget-i"></i>    
+    <weather-card [title]="favorite.locationName" [weather]="favorite.currentCondition">      
+    </weather-card>
+  </a>
 </div>

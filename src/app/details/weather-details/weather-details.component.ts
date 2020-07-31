@@ -21,7 +21,6 @@ export class WeatherDetailsComponent implements OnInit {
   forecast$: Observable<WeatherForecast[]>
   tempUnit$: Observable<any>
   astrConditions$: Observable<any>
-  showAstr = false
   
   constructor(private loc:Location, private store: WeatherStore) {
     const param = this.loc.getState()
@@ -46,10 +45,6 @@ export class WeatherDetailsComponent implements OnInit {
     this.store.resetAlerts()
   }
 
-  collapse() {
-    this.showAstr = !this.showAstr;
-  }
-
   get combined$(){
     return combineLatest(
       this.details$,
@@ -58,30 +53,5 @@ export class WeatherDetailsComponent implements OnInit {
       this.astrConditions$,
       (detail, forecast, unit, astr) => {return {detail, forecast, unit, astr}})  
   }
-  
-  updateFavorite(item: LocationWeather){       
-    if(item.isFavorite) this.store.removeFavorite(item.locationId)
-    else this.store.addFavorite({id: item.locationId, name: item.locationName})
-  }
-
-  setFavoriteIcon(isFavorite) {
-    if(isFavorite) return {icon: 'fas fa-bookmark', caption: 'Remove\nFavorite'}
-    else return {icon: 'far fa-bookmark', caption: 'Add\nFavorite'}
-  }
-
-  switchTempUnit(unit) {
-    let currentUnit = 'C'
-    if(unit.caption == 'Celsius') currentUnit = 'F'
-    this.store.setTempUnit(currentUnit)
-  }
-
-  setTemperature(details, unit) {
-    if(unit.caption == 'Celsius') return details.currentCondition.temperature
-    else return details.currentCondition.temperatureF
-  }
-
-  setAstr(astr) {
-    if(astr) return 'fas fa-meteor'
-    else return ''
-  }
+ 
 }

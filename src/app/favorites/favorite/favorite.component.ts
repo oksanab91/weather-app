@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Favorite } from '@models/models';
+import { LocationDetails } from '@models/models';
 import { HelperService } from '@core/service';
 import { Observable } from 'rxjs';
 import { WeatherStore } from '@core/store';
@@ -10,7 +10,7 @@ import { WeatherStore } from '@core/store';
   styleUrls: ['./favorite.component.scss']
 })
 export class FavoriteComponent implements OnInit {
-  @Input()  favorite: Favorite;
+  @Input()  favorite: LocationDetails;
   tempUnit$: Observable<any>
 
   constructor(private helper: HelperService, private store: WeatherStore) { }

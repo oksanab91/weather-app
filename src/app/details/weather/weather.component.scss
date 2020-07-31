@@ -1,0 +1,25 @@
+@import "components/form";
+@import "components/button";
+@import "layout/containers";
+
+.container-header-icon {    
+    span {
+        white-space: break-spaces; 
+    }       
+}
+
+.card-link:hover {
+    opacity: 0.9;
+}
+
+#astr {    
+    transition: opacity 0.5s linear, height 0.5s step-start;
+}
+
+.collapse {
+    display: block;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition-timing-function: linear, step-end;
+}

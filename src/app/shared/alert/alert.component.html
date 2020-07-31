@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngFor="let alert of messages let i = index; trackBy: trackByFn" [@fadeInOutQueryAnimation]=''>    
+  <div *ngFor="let alert of messages; trackBy: trackByFn" [@fadeInOutQueryAnimation]=''>    
     <div class="alert alert-dismissible fade show" [ngClass]="'alert-' + (alert.type || 'warning')" role="alert">
       <span>{{alert.message}}</span>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close(alert)">

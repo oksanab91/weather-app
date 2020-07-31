@@ -1,16 +1,14 @@
-import { LocationWeather, WeatherCondition, WeatherForecast } from './weather';
+import { LocationWeather, WeatherCondition, WeatherForecast, LocationDetails } from './weather';
 import { LocationShort } from './location';
-import { Favorite } from './favorite';
 
 export const models = [    
     LocationWeather,
     WeatherCondition,
     WeatherForecast,
     LocationShort,
-    Favorite 
+    LocationDetails
 ];
 
 export * from './alert'
 export * from './weather'
-export * from './favorite'
 export * from './location'

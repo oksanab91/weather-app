@@ -24,6 +24,6 @@ export class ForecastComponent {
   }
 
   trackByFn(index, item) {
-    return item.id
+    return item.day
   }
 }

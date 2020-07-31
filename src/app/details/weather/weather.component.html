@@ -1,0 +1,39 @@
+<div class="container container-header">
+    <div class="row">                
+        <div class="col-sm container-header-block block-left">
+            <h3>{{details.locationName}}</h3>
+            <h4>{{setTemperature(details, temperatureUnit)}}
+                <span class="fas">{{temperatureUnit.icon}}</span>          
+            </h4>
+            <a class="card-link" (click)="collapse()" aria-label="Near Earth Asteroid">
+                <i class="{{setAstr(astrConditions.name)}}"></i>
+            </a>
+            <span id="astr" [ngClass]="showAstr? 'show' : 'collapse'">
+                 Near Earth Asteroid {{astrConditions.name}}  
+                {{astrConditions.diameterMin}} meters accross
+                <div>will pass at a distance of {{astrConditions.missDistance | number:'':'en'}} kilometers</div>
+            </span>
+        </div>
+        <div class="col-sm container-header-block">
+            <div class="row row-block-right">
+                <div class="col-sm-3 col-3 col-lg-2">
+                    <button class="btn btn-small btn-plus btn-plus-mobile" (click)="switchTempUnit(temperatureUnit)" aria-label="Temperature unit">
+                        <span class="fas">{{temperatureUnit.icon}}</span>
+                    </button>
+                    <span>{{temperatureUnit.caption}}</span>
+                </div>
+                <div class="col-sm-3 col-3 col-lg-2">
+                    <button class="btn btn-small btn-plus btn-plus-mobile" (click)="updateFavorite(details)" aria-label="Bookmark">                           
+                        <i class="{{setFavoriteIcon(details.isFavorite).icon}}"></i>
+                    </button>
+                    <span>{{setFavoriteIcon(details.isFavorite).caption}}</span>
+                </div>
+            </div>                    
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-12 col-lg-12 container-header-block">                    
+            <i class="widget-i {{details.currentCondition.weatherIcon}}"></i>                    
+            <h2>{{details.currentCondition.weatherText}}</h2>
+        </div>
+    </div>
+</div>

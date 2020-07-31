@@ -1,0 +1,14 @@
+<div class="card-body">          
+    <div class="card-block block-widget">
+        <h5 class="card-title">{{title}}</h5>
+        <h6 class="card-subtitle">{{setTemperature(tempUnit$ | async)}} 
+            <span class="fas">{{(tempUnit$ | async)?.icon}}</span>
+        </h6>
+    </div>                
+    <div class="card-block">
+        <div class="card-block block-widget">                                
+            <i class="widget-i {{weather.weatherIcon}}"></i>
+            <h6 class="card-title">{{weather.weatherText}}</h6>          
+        </div>
+    </div>
+</div>

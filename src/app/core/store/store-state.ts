@@ -1,8 +1,8 @@
-import {LocationWeather, Favorite, LocationShort, WeatherForecast, Alert} from '@models/models';
+import {LocationWeather, LocationDetails, LocationShort, WeatherForecast, Alert} from '@models/models';
 
 
   export class AppState {
-    favorites: Favorite[]
+    favorites: LocationDetails[]
     details: LocationWeather = new LocationWeather()
     locations: LocationShort[]
     currentLocation: LocationShort

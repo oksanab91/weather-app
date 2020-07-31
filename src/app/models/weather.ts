@@ -1,8 +1,11 @@
-export class LocationWeather {
+export class LocationDetails {
     locationId: string
-    locationName: string
-    isFavorite: boolean
-    currentCondition: WeatherCondition = new WeatherCondition()    
+    locationName: string    
+    currentCondition: WeatherCondition = new WeatherCondition()  
+}
+
+export class LocationWeather extends LocationDetails{
+    isFavorite: boolean  
 }
 
 export class WeatherCondition {
@@ -12,10 +15,6 @@ export class WeatherCondition {
     weatherIcon: number
 }
 
-export class WeatherForecast {
+export class WeatherForecast extends WeatherCondition{
     day: string
-    temperature: number
-    temperatureF: number
-    weatherText: string
-    weatherIcon: number
 }

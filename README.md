@@ -17,7 +17,7 @@ There is an option to switch between Celsius and Fahrenheit temperature units an
 - [RxJs](https://angular.io/guide/rx-library) to get and manage data
 - [NgRx](https://ngrx.io/) for state management of the app
 - [Angular Autocomplete](https://www.npmjs.com/package/angular-ng-autocomplete) to show and select the cities from AccuWeather API 
-- [AccuWeather API](https://developer.accuweather.com/) and [NASA Open APIs](https://api.nasa.gov/) to get current weather condition and 5 day's forecast by location
+- [AccuWeather API](https://developer.accuweather.com/) and [Open APIs](https://api.nasa.gov/) to get current weather condition and 5 day's forecast by location
 
 
 ## Development server

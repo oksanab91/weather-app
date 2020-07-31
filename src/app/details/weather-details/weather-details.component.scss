@@ -4,15 +4,6 @@
 @import "layout/containers";
 
 
-.container-header-icon {    
-    span {
-        white-space: break-spaces; 
-    }       
-}
-
-.card-link:hover {
-        opacity: 0.9;
-}
 
 @media screen and (max-width: 800px) {
     .container-fluid {
