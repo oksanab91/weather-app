@@ -31,6 +31,21 @@ export class HelperService {
 
     }
 
+    setUVIiconc(val) {        
+        if(val < 6) return {icon: 'fas fa-thermometer-half', class: 'low'}        
+        if(val > 5 && val < 8) return {icon: 'fas fa-thermometer-full', color: 'heigh'}
+        if(val > 7 && val < 11) return {icon: 'fas fa-thermometer-full', color: 'very-height'}
+        else return {icon: 'fas fa-thermometer-full', color: 'extreme'}
+    }
+
+    setWindText(val) {
+        if(val < 34) return 'Moderate'
+        else if(val > 33 && val < 48) return 'Gale'
+        else if(val > 47 && val < 56) return 'Storm'
+        else if(val > 55 && val < 64) return 'Violent storm'
+        else if(val > 63) return 'Hurricane'
+    }
+
     celsius2Fahrenheit(celsius) {
         return Math.round((celsius * 1.8) + 32)
     }
@@ -40,5 +55,11 @@ export class HelperService {
           return "0" + n;
         }
         return n
+    }
+
+    getDayOfWeek(date: string) {
+        const theDay = new Date(date)
+        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        return weekday[theDay.getDay()]
     }
 }

@@ -1,6 +1,14 @@
+@import "abstracts/app-variables";
 @import "components/form";
 @import "components/button";
 @import "layout/containers";
+
+
+.container-header {
+    background-image: var($backImgUrl);
+    background-size: cover;
+    background-color: var($backgroundColorNavSearch);
+}
 
 .container-header-icon {    
     span {
@@ -9,17 +17,45 @@
 }
 
 .card-link:hover {
-    opacity: 0.9;
+    color: var($colorLight);
 }
 
-#astr {    
-    transition: opacity 0.5s linear, height 0.5s step-start;
+.block-left {
+    h3 > span{
+        padding-left: 5px;
+    }
 }
 
-.collapse {
-    display: block;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition-timing-function: linear, step-end;
+.card-block-list {
+    padding: 15px;
+    li {
+        font-size: .8rem;
+
+        .card-link:hover {
+            color: var($colorLight);    
+        }
+    }
+    .widget-i, .fas {
+        font-size: .8rem; 
+    }
+}
+
+.heigh {
+    color: orange;
+}
+.very-height {
+    color: red;
+}
+.extreme {
+    color: violet
+}
+
+.toggle-button {
+    width: 80px
+}
+
+@media screen and (max-width: 800px) {
+    .card-block-list {
+        padding-top: 5px;
+    }
 }

@@ -1,5 +1,3 @@
-<nav-search></nav-search>
-
 <div class="container-fluid" [@fadeInAnimation]=''>
     <ng-container *ngIf="(combined$ | async) as details">
         <weather [details]="details.detail" [temperatureUnit]="details.unit" [astrConditions]="details.astr"></weather>

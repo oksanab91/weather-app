@@ -1,7 +1,23 @@
 @import "components/cards";
 @import "components/button";
+@import "abstracts/app-variables";
 
 :host { 
     padding: $paddingSmall;
     text-align: center;
+}
+
+.widget-card {
+    border: var($cardBorder);
+    box-shadow: var($boxShadow);
+}
+
+@media screen and (max-width: 580px) {
+    .widget-i {
+        display: none;
+    }
+    .widget-card {
+        border: none;
+        box-shadow: none;
+    }
 }

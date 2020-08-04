@@ -1,14 +1,19 @@
 <div class="card-body">          
-    <div class="card-block block-widget">
+    <div class="card-block block-widget col-sm-12 col-md-12 col-3">
         <h5 class="card-title">{{title}}</h5>
+    </div>
+    <div class="card-block block-widget col-sm-12 col-md-12 col-2">
         <h6 class="card-subtitle">{{setTemperature(tempUnit$ | async)}} 
             <span class="fas">{{(tempUnit$ | async)?.icon}}</span>
         </h6>
-    </div>                
-    <div class="card-block">
-        <div class="card-block block-widget">                                
-            <i class="widget-i {{weather.weatherIcon}}"></i>
-            <h6 class="card-title">{{weather.weatherText}}</h6>          
+    </div> 
+    <div class="card-block block-widget block-widget-bottom col-sm-12 col-md-12 col-7">                                
+        <i class="widget-i {{weather.weatherIcon}}"></i>
+        <h6 class="card-title">{{weather.weatherText}}</h6>
+        
+        <div class="weather-subheader">
+            <i class="{{setWind().icon}}"></i>
+            <div>{{wind.caption}} wind</div>
         </div>
     </div>
 </div>

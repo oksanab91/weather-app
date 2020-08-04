@@ -1,5 +1,5 @@
 
-$boxShadowColor: #3d4851; // #875e5e; ??
+$boxShadowColor: #3d4851;
 
 $font: "font-family: 'Open Sans', sans-serif";
 $fontSize: 16px;
@@ -20,6 +20,39 @@ $cardMinHeight: 300px;
 $modalMaxWidth: 450px;
 $modalMinWidth: 250px;
 
+$theme-back-image: (
+  'base':(
+    'dark': '/assets/images/silhouette-dark.jpg',
+    'light': '/assets/images/mountains-light.png'
+    ),
+  'mobile':(
+    'dark': '/assets/images/silhouette-dark.jpg',
+    'light': '/assets/images/mountains-light.png'
+  )
+);
+
+$theme-card-border: (
+  'base':(
+    'dark': '1px solid #E2DDCF',
+    'light': 'none'
+  ),
+  'mobile':(
+    'dark': 'none',
+    'light': 'none'
+  )  
+);
+
+$theme-box-shadow: (
+    'base':(
+      'dark': 'none',
+      'light': '0 1px 10px rgba(61,72,81,0.4)'
+    ),
+    'mobile':(
+      'dark': 'none',
+      'light': 'none'
+    )
+);
+
 $backgroundColorPrimary: --backgroundColorPrimary;
 $backgroundColorWidget: --backgroundColorWidget;
 $backgroundColorNavSearch: --backgroundColorNavSearch;
@@ -31,40 +64,71 @@ $warnColor: --warnColor;
 $editColor: --editColor;
 $colorPrimary: --colorPrimary;
 $activeColor: --activeColor;
+$cardBorder: --cardBorder;
+$boxShadow: --boxShadow;
+$backImgUrl: --backImgUrl;
+$colorWeatherMain: --colorWeatherMain;
+$colorMainMobile: --colorMainMobile;
+
 
 $theme-map-light: (
-    $backgroundColorPrimary: #f1f1f1, // #f4f5f5;
-    $backgroundColorWidget: #b35900,
+    $backgroundColorPrimary: #f1f1f1,
+    $backgroundColorWidget: transparent,
     $backgroundColorNavSearch: #b35900,
-    $colorWidget: #ffffff,
+    $colorWidget: #212529,
     $colorDark: #b35900,
     $colorLight: #ffe6cc,
     $colorDarkSecondary: #804000,
+    $colorWeatherMain: #804000,
+    $colorMainMobile: #ffffff,
     $warnColor: #e74c3c,
     $editColor: #26734d,
     $colorPrimary: #212529,
-    $activeColor: #ffffff
+    $activeColor: #ffffff,
+    $boxShadow: 0 1px 10px rgba(61,72,81,0.4),
+    $cardBorder: none,
+    $backImgUrl: url(theme-back-image())
 );
 
 $theme-map-dark: (
     $colorDark: #C6BC9F,
     $colorLight: #80734D,
-    $colorDarkSecondary: #ffffff,
+    $colorDarkSecondary: #E2DDCF,
     $backgroundColorPrimary: #001A33,    
-    $backgroundColorWidget: #CCCCFF,
+    $backgroundColorWidget: transparent,
     $backgroundColorNavSearch: #001A33,
-    $colorWidget: #212529,
+    $colorWidget: #E2DDCF,
+    $colorWeatherMain: #ffffff,
+    $colorMainMobile: #ffffff,
     $activeColor: #001A33,
     $colorPrimary: #ffffff,
     $warnColor: #e74c3c,
-    $editColor: #26734d,  
+    $editColor: #26734d,
+    $boxShadow: none,
+    $cardBorder: 1px solid #E2DDCF,
+    $backImgUrl: url(theme-back-image(base, dark))
 );
-  
+
 $errorMessageColor: #cc0000;
 
 $btnDiameter: 3.75rem;
 $containerMargine: 5rem;
 $mobileContainerMargine: 7rem;
+
+@function theme-back-image($key: 'base', $variant: 'light') {
+    $map: map-get($theme-back-image, $key);
+    @return map-get($map, $variant);
+};
+
+@function theme-card-border($key: 'base', $variant: 'light') {
+    $map: map-get($theme-card-border, $key);
+    @return map-get($map, $variant);  
+};
+
+@function theme-box-shadow($key: 'base', $variant: 'light') {
+    $map: map-get($theme-box-shadow, $key);
+    @return map-get($map, $variant);  
+};
 
 @mixin spread-map($map: ()) {
     @each $key, $value in $map {
@@ -78,6 +142,11 @@ $mobileContainerMargine: 7rem;
 
 @mixin main-background-color {    
     background-image: linear-gradient(180deg, var($colorDarkSecondary), var($colorDark));
+    background-size: cover;
+}
+
+@mixin main-background-image($url) {
+    background-image: url($url);
     background-size: cover;
 }
 

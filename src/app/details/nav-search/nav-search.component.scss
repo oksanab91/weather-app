@@ -5,27 +5,13 @@
     @include input-border;
 }
 
-.search-container {
-    padding: $paddingNormal; 
-    background-color: var($backgroundColorNavSearch);
+.container-flex {
+    display: block;
+
 }
 
 .ng-autocomplete{
-    width: 250px;
+    width: 100%;
     margin-left: auto;
-    margin-right: auto;    
-    transition: width 0.4s linear;
-}
-
-.ng-autocomplete:hover{
-    width: 500px;
-    transition: width 0.4s linear;
-}
-
-
-@media screen and (max-width: 800px) {
-    .ng-autocomplete:hover{
-        width: 100%;
-        transition: width 0.4s linear;
-    }
+    margin-right: auto;
 }

@@ -6,23 +6,31 @@ export const lightTheme = {
   '--colorLight': '#ffe6cc',
   '--colorDarkSecondary': '#804000',
   '--backgroundColorPrimary': '#f1f1f1',
-  '--backgroundColorWidget': '#b35900',
+  '--backgroundColorWidget': 'transparent',
   '--backgroundColorNavSearch': '#b35900',
-  '--colorWidget': '#ffffff',
+  '--colorWidget': '#212529',
+  '--colorWeatherMain': '#804000',
+  '--colorMainMobile': '#ffffff',  
   '--activeColor': '#ffffff',
-  '--colorPrimary': '#212529'
+  '--colorPrimary': '#212529',
+  '--boxShadow': '0 1px 10px rgba(61,72,81,0.4)',
+  '--cardBorder': 'none'
 }
 
 export const darkTheme = {
   '--colorDark': '#C6BC9F',
   '--colorLight': '#80734D',
-  '--colorDarkSecondary': '#ebe9e0',
+  '--colorDarkSecondary': '#E2DDCF',
   '--backgroundColorPrimary': '#001A33',
-  '--backgroundColorWidget': '#CCCCFF',
+  '--backgroundColorWidget': 'transparent',
   '--backgroundColorNavSearch': '#001A33',
-  '--colorWidget': '#212529',
+  '--colorWidget': '#E2DDCF',
+  '--colorWeatherMain': '#ffffff',
+  '--colorMainMobile': '#ffffff',
   '--activeColor': '#001A33',
-  '--colorPrimary': '#ffffff'
+  '--colorPrimary': '#ffffff',
+  '--boxShadow': 'none',
+  '--cardBorder': '1px solid #E2DDCF'
 }
 
 
@@ -49,5 +57,12 @@ export class ThemeService {
     Object.keys(theme).forEach(k =>
       document.documentElement.style.setProperty(k, theme[k])
     )
+    
+    if(this.activeThemeDark){
+      document.documentElement.style.setProperty('--backImgUrl', 'url(/assets/images/silhouette-dark.jpg)')
+    }
+    else {
+      document.documentElement.style.setProperty('--backImgUrl', 'url(/assets/images/mountains-light.png)')
+    }
   }
 }

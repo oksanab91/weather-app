@@ -3,16 +3,19 @@
 
 .container-fluid {
     height: 100%;
-    display: flex;      
+    display: flex;
     justify-content: center;
     text-align: center;
-    @include main-background-color;
+
+    background-image: var($backImgUrl);
+    background-size: cover;
+    background-color: var($backgroundColorNavSearch);
   
     a {
       margin: auto;    
-      color: #fff;
+      color: #ffffff;
       text-decoration: none;
-      border: 1px solid #ccc;
+      border: 1px solid #ffffff;
       padding: $paddingNormal $paddingLarge;  
       text-transform: uppercase;
       display: block;
@@ -23,3 +26,16 @@
       }
     }  
   }
+
+  @media screen and (max-width: 800px) {
+    .container-fluid {
+      a {
+        border: 5px solid var($activeColor);
+
+        h2 {        
+          font-weight: 600;
+        }
+      }      
+    }
+  }
+  

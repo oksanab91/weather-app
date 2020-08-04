@@ -4,10 +4,11 @@ import { SharedModule } from '@shared/shared.module';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { NavMainComponent } from './nav-main/nav-main.component';
 import { WeatherStore } from '@core/store';
+import { NavSearchComponent } from '../details/nav-search/nav-search.component';
 
 
 @NgModule({
-  declarations: [MainLayoutComponent, NavMainComponent],
+  declarations: [MainLayoutComponent, NavMainComponent, NavSearchComponent],
   imports: [    
     SharedModule,
     RouterModule.forChild([

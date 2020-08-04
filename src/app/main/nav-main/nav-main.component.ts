@@ -6,9 +6,9 @@ import { ThemeService } from '@core/service';
   templateUrl: './nav-main.component.html',
   styleUrls: ['./nav-main.component.scss']
 })
-export class NavMainComponent implements OnInit { 
-    header = 'Weather'
-    toggleOn = false
+export class NavMainComponent implements OnInit {
+  toggleOn = false
+  menuShow = false
 
   constructor(private themeService: ThemeService) { }
 
@@ -25,4 +25,12 @@ export class NavMainComponent implements OnInit {
     else return 'fas fa-toggle-off'
   }
 
+  setCollapseIcon() {
+    if(this.menuShow) return 'fas fa-chevron-up'
+    return 'fas fa-chevron-down'
+  }
+  collapseMenu() {
+    this.menuShow = !this.menuShow
+  }
+  
 }

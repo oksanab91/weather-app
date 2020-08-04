@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap, catchError } from 'rxjs/operators';
-import { WeatherApiService, HelperService } from '@core/service';
+import { WeatherApiService, MapperService } from '@core/service';
 import * as WeatherActions from './weather.actions';
 import { of } from 'rxjs';
 
@@ -13,13 +13,13 @@ export class WeatherEffects {
     mergeMap((action: WeatherActions.LoadLocations) => this.apiService.getLocations(action.payload)
     .pipe(
         map(locations => {            
-            const arr = locations.map(item => {return {id: item.Key, name: item.LocalizedName}})            
-            return { type: WeatherActions.LOAD_LOCATIONS_SUCCESS, 
-              payload: arr }}
-            ),
+          const arr = locations.map(item => {return {id: item.Key, name: item.LocalizedName}})            
+          return { type: WeatherActions.LOAD_LOCATIONS_SUCCESS, 
+            payload: arr }
+        }),
         catchError(error => 
         {
-          console.log(error)
+          console.error(error)
           return of({ type: WeatherActions.SET_ALERT, 
             payload: {type: 'danger', message: 'Error loading locations'} })
         })        
@@ -32,19 +32,13 @@ export class WeatherEffects {
     mergeMap(() => this.apiService.getFavorites()
     .pipe(
         map(favorites => {            
-            favorites = favorites.map(data => {
-              const tm = Math.round(data.weather[0].Temperature.Metric.Value)
-              const fahr = Math.round(data.weather[0].Temperature.Imperial.Value)
-              const desc = data.weather[0].WeatherText
-              const weatherIcon = this.helper.setWeatherIcon(data.weather[0].WeatherIcon, tm)
+          favorites = favorites.map(data => {
+            const weather =  this.mapper.mapFavorite(data.weather[0])
+            return {locationId: data.location.id, locationName: data.location.name, currentCondition: weather}
+          })
 
-              return {locationId: data.location.id,
-                locationName: data.location.name,    
-                currentCondition: {temperature: tm, weatherText: desc, temperatureF: fahr, weatherIcon: weatherIcon}}
-            })
-
-            return { type: WeatherActions.LOAD_FAVORITES_SUCCESS, payload: favorites }}
-            ),
+          return { type: WeatherActions.LOAD_FAVORITES_SUCCESS, payload: favorites }
+        }),
         catchError(error => 
         {
           console.error(error.message)
@@ -61,8 +55,8 @@ export class WeatherEffects {
     .pipe(
         map(result => {
           const message = {type: 'success', message: 'Location added to the favorites'}         
-          return { type: WeatherActions.ADD_FAVORITES_SUCCESS, payload: message }}
-        ),
+          return { type: WeatherActions.ADD_FAVORITES_SUCCESS, payload: message }
+      }),
       catchError(error => 
       {
         console.error(error.message)
@@ -79,8 +73,8 @@ export class WeatherEffects {
     .pipe(
         map(result => {
           const message = {type: '', message: 'Location removed from favorites'}          
-          return { type: WeatherActions.REMOVE_FAVORITES_SUCCESS, payload: message }}
-        ),
+          return { type: WeatherActions.REMOVE_FAVORITES_SUCCESS, payload: message }
+        }),
         catchError(error =>
         { 
           console.error(error.message)
@@ -97,35 +91,24 @@ export class WeatherEffects {
     mergeMap((action: WeatherActions.LoadWeather) => this.apiService.getWeather(action.payload.id)
     .pipe(
       map(data => {
-        //weather condition           
-        const tm = Math.round(data.weather[0].Temperature.Metric.Value)
-        const fahr = Math.round(data.weather[0].Temperature.Imperial.Value)
-        const desc = data.weather[0].WeatherText
-        const weatherIcon = this.helper.setWeatherIcon(data.weather[0].WeatherIcon, tm)
+        //weather condition
+        const weather =  this.mapper.mapWeather(data.weather[0])
 
         //forecast
         let daily = data.forecast['DailyForecasts']
+        daily = daily.map(day => this.mapper.mapForecast(day) )
 
-        daily = daily.map(day => {
-          const dt = day.Date
-          const tm = Math.round((day.Temperature.Minimum.Value + day.Temperature.Maximum.Value)/2)
-          const fahr = this.helper.celsius2Fahrenheit(tm)           
-          const weatherIcon = this.helper.setWeatherIcon(day.Day.Icon, tm)          
-          const desc = day.Day.ShortPhrase
-
-          return {day: dt, temperature: tm, weatherText: desc, weatherIcon: weatherIcon, temperatureF: fahr}
-        })
-        
         return { type: WeatherActions.LOAD_WEATHER_SUCCESS, 
-          payload: {details: {
-            locationId: action.payload.id, 
-            locationName: action.payload.name, 
-            isFavorite: this.apiService.checkIsFavorite(action.payload.id),
-            currentCondition: {temperature: tm, weatherText: desc, weatherIcon: weatherIcon, temperatureF: fahr}},
+          payload: {
+            details: {
+              locationId: action.payload.id, 
+              locationName: action.payload.name, 
+              isFavorite: this.apiService.checkIsFavorite(action.payload.id),
+              currentCondition: weather
+            },
             forecast: daily 
-          }          
-          }
-        }),
+          }} 
+      }),
       catchError(error => 
       {
         console.error(error.message)
@@ -148,25 +131,19 @@ export class WeatherEffects {
               let theDate = data[date]
               
               theDate = theDate.map(element => {
-                return {
-                  id: element.id,
-                  name: element.name,
-                  hazardous: element.is_potentially_hazardous_asteroid,
-                  dateFull: element.close_approach_data[0].close_approach_date_full,
-                  diameterMin: Math.round(element.estimated_diameter.meters.estimated_diameter_min),
-                  missDistance: Math.round(element.close_approach_data[0].miss_distance.kilometers)
-                }
+                return this.mapper.mapAstr(element)
               })
-              theDate = theDate.filter(val => val.hazardous)
               arr = [...arr, ...theDate]
             }
 
+            if(arr.find(val => val.hazardous)) arr = arr.filter(val => val.hazardous)
+
             arr.sort((a, b) => (a.missDistance - b.missDistance))          
-            return { type: WeatherActions.LOAD_ASTR_SUCCESS, payload: arr.length>0 ? arr[0] : {} }}
-          ),
+            return { type: WeatherActions.LOAD_ASTR_SUCCESS, payload: arr.length>0 ? arr[0] : {} }
+        }),
         catchError(error => 
         {
-          console.log(error)
+          console.error(error.message)
           return of({ type: WeatherActions.SET_ALERT, 
             payload: {type: 'danger', message: 'Error loading astr.'} })
         })        
@@ -177,6 +154,6 @@ export class WeatherEffects {
   constructor(
     private actions$: Actions,
     private apiService: WeatherApiService,
-    private helper: HelperService
+    private mapper: MapperService
   ) {}
 }

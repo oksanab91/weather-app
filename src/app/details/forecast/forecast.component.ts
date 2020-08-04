@@ -23,6 +23,10 @@ export class ForecastComponent {
     else return weather.temperatureF
   }
 
+  getDayOfWeek(date) {
+    return this.helper.getDayOfWeek(date)
+  }
+
   trackByFn(index, item) {
     return item.day
   }

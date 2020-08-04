@@ -1,9 +1,20 @@
 @import "layout/containers";
 
 .container-fluid {
-    padding-bottom: $paddingNormal;
+    padding: $paddingNormal;
+
+    .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 .card-wrap {
     padding: 5px;
+}
+
+@media screen and (max-width: 800px) {    
+    .container-fluid, .container-header {
+        padding: 0;
+    }
 }

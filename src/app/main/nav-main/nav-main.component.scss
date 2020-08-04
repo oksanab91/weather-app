@@ -2,19 +2,108 @@
 @import "layout/containers";
 
 :host {
-    padding: 0;
     width: 100%;    
     background-color: transparent;
     color: var($colorDarkSecondary);
 }
 
-.nav-right{
-    margin-left: auto;
-    .nav-item{
-        text-align: center;
-    } 
+.container {
+    padding: 0;
+    flex-wrap: nowrap;
+}
+
+.nav-items {
+    list-style-type: none;
+    margin: 0;    
+    padding: $paddingNormal 0;   
+}
+
+.nav-item{
+    padding-right: $paddingSmall;
+    display: inline-block;
+    text-align: center;
 }
 
 .navbar-brand {    
     font-size: 2rem;   
+}
+
+.navbar .container-fluid {
+    justify-content: center;    
+}
+
+.nav-search {
+    margin: 0;
+    text-align: center;
+    width: 350px;
+}
+
+.nav-card {
+    background: transparent;
+    border: none;
+
+    .btn-collapse {
+        display: none;
+    }
+    .collapse, .show {
+        display: block;
+        max-height: $cardMinWidth;
+        transition: none;
+    }
+}
+
+   
+@media screen and (max-width: 800px) {
+    .accordion-menu{
+        width: 100%;
+
+        .nav-card {
+            .btn-collapse {
+                display: block;
+                text-align: center;
+                width: 100%;
+            }
+            
+            .nav-right {
+                padding-top: 5px;
+            }
+
+            .collapse, .show {
+                max-height: 0;
+                transition: max-height 0.5s ease-in-out;
+            }
+            
+            .collapse:not(.show) {
+                display: block;
+                max-height: 0;   
+            }
+            
+            .show {
+                display: block;
+                max-height: $cardMinWidth;    
+            }            
+            
+        }
+    }
+
+    .navbar .container-fluid {
+        padding: 0;        
+    }
+
+    .navbar-brand {
+        margin: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .nav-search {
+        width: 100%;
+        padding-top: 5px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .nav-items {
+        padding: 0.9rem;
+    }
 }

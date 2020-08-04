@@ -54,12 +54,15 @@ $mobileCardPlusHeight: 6.7rem;
 
 .card-block-list {
     @include clear-all;    
-    list-style-type: none;    
-    height: 100%;
+    list-style-type: none;
+    align-items: center; 
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    flex-wrap: nowrap;    
+    flex-wrap: nowrap;
+    
+    li {
+        text-align: center;
+    }
 }
 
 .card-footer {
@@ -91,6 +94,8 @@ $mobileCardPlusHeight: 6.7rem;
 
 .widget-card {
     @include app-card;
+    font-weight: 300;
+    border: none;
     min-width: auto;
     min-height: auto;
     padding: $paddingNormal;
@@ -131,6 +136,11 @@ $mobileCardPlusHeight: 6.7rem;
     .block-widget {
         font-size: $widgetFontSize; 
         padding: $paddingNormal 0;
+        padding-top: 0;
+    }
+
+    .block-widget-bottom {        
+        padding-bottom: 0;
     }
     
     .card-link {
@@ -149,14 +159,68 @@ $mobileCardPlusHeight: 6.7rem;
 }
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
     .card-block-left {
         text-align-last: end;
     }
 
     .card-plus {
-        margin-bottom: -$mobileCardPlusHeight;
+        margin-bottom: $mobileCardPlusHeight;
         min-height: $mobileCardPlusHeight;
         height: $mobileCardPlusHeight;
+    }
+
+    .widget-card {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+}
+
+@media screen and (max-width: 580px) {
+    .card-block {
+        padding-left: 5px;
+    }
+
+    .card-body{
+        text-align: start;
+    }
+
+    .card-subtitle{
+        margin: auto;
+        margin-left: 0;
+    }
+    
+    .card-title {
+        margin-right: auto;               
+    }
+
+    .card-block > h6 {
+        padding-left: 5px;
+    }
+
+    .card-block > h5 {
+        margin-top: auto;
+        margin-bottom: auto;
+        font-size: 1.1rem;
+        text-align: start;
+        line-break: loose;
+    }
+
+    .card-body, .block-widget{
+        display: flex;
+        justify-content: space-between;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 0;
+        
+        .block-widget-bottom{
+            align-items: center;
+        }
+
+        .card-subtitle{
+            margin: auto;
+            margin-left: 0;
+        }
     }
 }

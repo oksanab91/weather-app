@@ -1,6 +1,5 @@
 @import "../abstracts/app-variables";
 
-$mobileNavHeight: 6.6rem;
 
 .list-container-fluid {
     padding: 0;
@@ -13,36 +12,41 @@ $mobileNavHeight: 6.6rem;
     margin: 0;
 } 
 
-.nav-items {    
-    list-style-type: none;
-    margin: 0;    
-    padding: $paddingNormal;
-    
-    .nav-item {        
-        padding-left: $paddingSmall;
-        padding-left: $paddingSmall;
-    }
-}
-
 .container-header{
     text-align: center;
     padding-top: $paddingNormal;
     padding-bottom: $paddingNormal;
-    color: var($colorDarkSecondary);
+    color: var($colorWeatherMain);
     
     .container-header-block {
-        padding-top: $paddingSmall;
-        padding-bottom: $paddingSmall;
+        padding: $paddingNormal;
     }
 
-    .block-left {
-        text-align: start;
+    .row-block-center {
+        justify-content: center;        
     }
 
-    .row-block-right
-    {
-        justify-content: flex-end;
+    .current-weather{        
+        .widget-i, h2 {
+            color: var($colorMainMobile);
+        }
     }
+
+    .card-block-list{
+        color: var($colorPrimary);
+        .widget-i{
+            color: var($colorPrimary);
+
+            &:hover {
+                color: var($colorLight);    
+            }
+        }
+    }
+}
+
+.block-right {
+    display: inline-flex;
+    justify-content: center;
 }
 
 .clear-all {
@@ -57,21 +61,48 @@ $mobileNavHeight: 6.6rem;
     .row-list {        
         @include clear-all;
     }
-    
+
     .container-header {
         .container-header-block {
             text-align: center;
             justify-content: center;
+
+            h3, h4 {
+                display: inline-flex;
+            }
+            h2 {
+                margin-bottom: 0;                
+            }
         }
     
+        .current-weather{
+            color: var($colorMainMobile);
+        }
+
         .block-left {
             text-align: center;
         }
-   
-        .row-block-right
-        {
-            justify-content: center;
-        }
-    }    
 
+        .card-block-list{
+            color: var($colorMainMobile);
+            .widget-i{
+                color: var($colorMainMobile);
+            }
+        }
+    }
+        
+}
+
+@media screen and (max-width: 580px) {
+    .container-header {
+        .block-right {            
+            justify-content: flex-end;
+        }
+    }
+
+    .container-header {
+        .block-left {
+            text-align: start;
+        }
+    }
 }

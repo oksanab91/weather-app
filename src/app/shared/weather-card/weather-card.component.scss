@@ -1,6 +1,18 @@
+@import "abstracts/app-variables";
 @import "components/cards";
 @import "components/button";
 
-.card-block h6 {
+.card-block {
+    h6 {
     font-weight: 400;
+    }
+    .weather-subheader {
+        color: var($colorDark);
+    }  
+}
+
+@media screen and (max-width: 580px) {
+    .weather-subheader {
+        width: 40%;
+    }
 }

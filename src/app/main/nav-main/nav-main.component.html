@@ -1,25 +1,43 @@
-<ul class="navbar nav-items w-100">
-  <div class="container">
-    <span class="navbar-brand mb-0 h1">{{header}}</span>
-    <div class="d-flex nav-right">
-      <li class="nav-item">
-        <a href="#" [routerLink]="['/home']" class="btn-plus btn-plus-mobile" aria-label="Home">
-          <i class="fas fa-home"></i>
-        </a>
-        Home
-      </li>
-      <li class="nav-item">
-        <a href="#" [routerLink]="['favorites']" class="btn-plus btn-plus-mobile" aria-label="Favorites">
-          <i class="fas fa-bookmark"></i>
-        </a>
-        Favorites
-      </li>
-      <li class="nav-item">
-        <button class="btn btn-plus btn-plus-mobile" (click)="toggleTheme()" aria-label="Theme">
-          <i class="{{setToggleIcon()}}"></i>
-        </button>
-        Theme        
-      </li>
+<div class ="container">
+  <ul class="navbar nav-items w-100">
+    <div class="accordion accordion-menu" id="accordionMenu">
+      <div class="card nav-card">
+
+        <a class="btn-collapse" data-toggle="collapse" data-target="#mainMenu" 
+            aria-expanded="true" aria-controls="mainMenu" (click) = "collapseMenu()" id="btnCollapse">
+            <i class="{{setCollapseIcon()}} widget-i"></i>        
+        </a>   
+
+        <div class="nav-right" id="mainMenu" [ngClass]="menuShow? 'show' : 'collapse'"
+          aria-labelledby="btnCollapse">
+
+          <li class="nav-item li-home">
+            <a href="#" [routerLink]="['/home']" class="btn-plus btn-plus-mobile" aria-label="Home">
+              <i class="fas fa-home"></i>
+            </a>
+            Home
+          </li>    
+          <li class="nav-item li-fav">
+            <a href="#" [routerLink]="['favorites']" class="btn-plus btn-plus-mobile" aria-label="Favorites">
+              <i class="fas fa-bookmark"></i>
+            </a>
+            Favorites
+          </li>
+          <li class="nav-item li-theme">
+            <button class="btn btn-plus btn-plus-mobile" (click)="toggleTheme()" aria-label="Theme">
+              <i class="{{setToggleIcon()}}"></i>
+            </button>
+            Theme
+          </li>
+
+        </div>
+
+      </div>
     </div>
-  </div>  
-</ul>
+
+    <div class="nav-search">
+      <nav-search></nav-search>
+    </div>
+
+  </ul>
+</div>

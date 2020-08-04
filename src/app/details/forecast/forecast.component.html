@@ -3,7 +3,7 @@
         <ng-container *ngFor="let weather of forecast; trackBy: trackByFn">            
             <div class="col-sm card-wrap">
                 <div class="card widget-card">
-                    <weather-card [title]="weather.day | date: 'MMM d, y'" [weather]="weather">      
+                    <weather-card [title]="getDayOfWeek(weather.day)" [weather]="weather">      
                     </weather-card>
                 </div>
             </div>        
